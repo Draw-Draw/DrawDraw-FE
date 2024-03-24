@@ -10,6 +10,8 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    'plugin:import/typescript',
+    'plugin:import/recommended',
   ],
   overrides: [
     {
@@ -34,5 +36,11 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'import/prefer-default-export': 'off',
+    rules: {
+      'react/function-component-definition': [
+        2,
+        { namedComponents: ['arrow-function', 'function-declaration'] },
+      ],
+    },
   },
 };
