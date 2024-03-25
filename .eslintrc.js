@@ -36,11 +36,16 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'import/prefer-default-export': 'off',
-    rules: {
-      'react/function-component-definition': [
-        2,
-        { namedComponents: ['arrow-function', 'function-declaration'] },
-      ],
+    'react/function-component-definition': [
+      2,
+      { namedComponents: ['arrow-function', 'function-declaration'] },
+    ],
+    settings: {
+      'import/resolver': {
+        node: {
+          paths: ['src'],
+        },
+      },
     },
   },
 };
