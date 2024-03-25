@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { Home } from './pages/Home/Home';
-import { Landing } from './pages/Landing';
-import { Onboarding } from './pages/Onboarding';
+import { Landing } from './pages/Landing/Landing';
+import { Onboarding } from './pages/OnBoarding/Onboarding';
 import { Register } from './pages/Register';
 
 export function Router() {
