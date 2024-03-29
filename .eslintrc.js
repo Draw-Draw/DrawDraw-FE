@@ -34,18 +34,12 @@ module.exports = {
   plugins: ['prettier', 'react', '@typescript-eslint', 'react-hooks'],
   rules: {
     'react/react-in-jsx-scope': 'off',
+    'react/require-default-props': 'off',
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'import/prefer-default-export': 'off',
     'react/function-component-definition': [
       2,
       { namedComponents: ['arrow-function', 'function-declaration'] },
     ],
-    settings: {
-      'import/resolver': {
-        node: {
-          paths: ['src'],
-        },
-      },
-    },
   },
 };
