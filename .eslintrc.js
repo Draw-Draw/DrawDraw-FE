@@ -35,8 +35,9 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react/require-default-props': 'off',
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'react/no-array-index-key': 'off',
     'import/prefer-default-export': 'off',
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/function-component-definition': [
       2,
       { namedComponents: ['arrow-function', 'function-declaration'] },
