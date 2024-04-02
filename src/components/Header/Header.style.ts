@@ -27,10 +27,14 @@ export const StyledBoxBtn = styled.img`
   position: relative;
 `;
 
-export const StyledMenuDropDown = styled.div`
+interface HeaderProps {
+  $isDrawing?: boolean;
+}
+
+export const StyledMenuDropDown = styled.div<HeaderProps>`
   position: absolute;
   margin-top: 98px;
-  margin-left: 6px;
+  margin-left: ${(props) => (props.$isDrawing ? '-70px' : '6px')};
   width: 140px;
   height: 210px;
   border-radius: 30px;

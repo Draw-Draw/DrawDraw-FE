@@ -14,7 +14,11 @@ import {
   StyledTextBox,
 } from './Header.style';
 
-export const Header = () => {
+interface HeaderProps {
+  isDrawing: boolean;
+}
+
+export const Header = ({ isDrawing }: HeaderProps) => {
   const [isHamburgerClicked, setIsHamburgerClicked] = useState(false);
   const navigate = useNavigate();
 
@@ -29,11 +33,11 @@ export const Header = () => {
     <StyledContainer>
       <StyledLogo src={Logo} />
       <StyledBoxBtnContainer>
-        <StyledBoxBtn src={DrawBoxBtn} onClick={handleGoDrawing} />
+        {!isDrawing && <StyledBoxBtn src={DrawBoxBtn} onClick={handleGoDrawing} />}
         {isHamburgerClicked ? (
           <>
             <StyledBoxBtn src={XBtn} onClick={handleClickedHamburger} />
-            <StyledMenuDropDown>
+            <StyledMenuDropDown $isDrawing={isDrawing}>
               <StyledTextBox>
                 <StyledText>내 일기장</StyledText>
                 <StyledText>친구 목록</StyledText>

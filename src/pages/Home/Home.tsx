@@ -12,7 +12,7 @@ import EmptySektchBook from '../../assets/EmptySketchBook.svg';
 export const Home = () => {
   return (
     <StyledContainer>
-      <Header />
+      <Header isDrawing={false} />
       <StyledBoardContainer>
         <StyledGreenBoard src={GreenBoard} />
         <StyledTodayDiaryGrid>
