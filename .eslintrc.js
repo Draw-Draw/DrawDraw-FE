@@ -37,6 +37,7 @@ module.exports = {
     'react/require-default-props': 'off',
     'react/no-array-index-key': 'off',
     'import/prefer-default-export': 'off',
+    'no-nested-ternary': 'off',
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/function-component-definition': [
       2,
