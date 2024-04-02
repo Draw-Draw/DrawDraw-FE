@@ -11,6 +11,7 @@ export const StyledBackground = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 `;
 
 export const StyledCardClip = styled.img`
@@ -18,6 +19,6 @@ export const StyledCardClip = styled.img`
   z-index: 9999px;
 
   @media (max-width: 1600px) {
-    width: 700px;
+    /* width: 700px; */
   }
 `;
