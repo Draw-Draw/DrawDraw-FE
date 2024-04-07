@@ -27,6 +27,10 @@ module.exports = {
     },
   ],
   parser: '@typescript-eslint/parser',
+  parserOptions: {
+    files: ['**/*.ts', '**/*.tsx'],
+    project: './tsconfig.json',
+  },
   plugins: ['prettier', 'react', '@typescript-eslint', 'react-hooks'],
   rules: {
     'react/react-in-jsx-scope': 'off',
