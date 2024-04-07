@@ -7,7 +7,7 @@ import {
 } from './Home.style';
 import { Header } from '../../components/Header/Header';
 import GreenBoard from '../../assets/GreenBoard.svg';
-import EmptySektchBook from '../../assets/EmptySketchBook.svg';
+import EmptySektchBook from '../../assets/EmptyDrawSketchBook.svg';
 
 export const Home = () => {
   return (
@@ -16,7 +16,7 @@ export const Home = () => {
       <StyledBoardContainer>
         <StyledGreenBoard src={GreenBoard} />
         <StyledTodayDiaryGrid>
-          {Array.from({ length: 6 }).map((_, index) => (
+          {Array.from({ length: 4 }).map((_, index) => (
             <StyledEmptySketchBook src={EmptySektchBook} key={index} />
           ))}
         </StyledTodayDiaryGrid>
