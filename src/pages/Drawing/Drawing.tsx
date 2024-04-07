@@ -3,6 +3,7 @@ import { Header } from '../../components/Header/Header';
 import {
   StyledContainer,
   StyledDaySelect,
+  StyledDaySelectContainer,
   StyledDrawingBook,
   StyledDrawingContainer,
   StyledDrawingDayText,
@@ -78,7 +79,7 @@ export const Drawing = () => {
           날씨
         </StyledDrawingText>
         {isSelectedWeather ? (
-          <>
+          <StyledDaySelectContainer onClick={handleOpenModal}>
             <StyledIcon
               type={isSelectedWeather}
               src={
@@ -102,23 +103,23 @@ export const Drawing = () => {
               {isSelectedWeather === 'Sunny'
                 ? '해가 쨍쨍'
                 : isSelectedWeather === 'Cloud'
-                  ? '구름 많음'
+                  ? '구름 많아요'
                   : isSelectedWeather === 'Moon'
-                    ? '보름달'
+                    ? '별이 빛나는 밤에'
                     : isSelectedWeather === 'Rainbow'
-                      ? '무지개'
+                      ? '일곱 빛깔 무지개'
                       : isSelectedWeather === 'Rainy'
-                        ? '비 내림'
+                        ? '비가 주륵주륵'
                         : isSelectedWeather === 'Snow'
-                          ? '눈 펑펑'
+                          ? '눈이 펑펑'
                           : ''}
             </StyledDrawingDayText>
-          </>
+          </StyledDaySelectContainer>
         ) : (
           <StyledDaySelect onClick={handleOpenModal}>날씨를 선택해주세요</StyledDaySelect>
         )}
         <Canvas />
-        <StyledInputDiary cols={70} rows={100} wrap="hard" maxLength={116} />
+        <StyledInputDiary cols={70} rows={100} wrap="hard" maxLength={100} />
       </StyledDrawingContainer>
       {modalOpen && <CommonModal onSelectWeather={handleSelectWeather} />}
       <StyledSelectBtn src={CompleteBtn} />

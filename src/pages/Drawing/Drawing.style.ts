@@ -110,7 +110,7 @@ export const StyledDaySelect = styled.div`
   font-weight: 400;
   line-height: 43.674px;
   margin-top: -4.3%;
-  margin-right: -45%;
+  margin-right: -40%;
 
   @media (min-width: 1601px) and (max-width: 1920px) {
     font-size: 40px;
@@ -138,9 +138,10 @@ export const StyledInputDiary = styled.textarea`
   font-size: 31px;
   font-style: normal;
   font-weight: 400;
-  line-height: 49px;
-  margin-top: -2%;
+  line-height: 43px;
+  bottom: -36%;
   margin-right: -2%;
+  margin-top: 34%;
   resize: none;
   overflow-x: hidden;
   white-space: pre-wrap;
@@ -149,13 +150,15 @@ export const StyledInputDiary = styled.textarea`
   @media (min-width: 1601px) and (max-width: 1920px) {
     font-size: 40px;
     line-height: 54px;
-    margin-top: -2.5%;
+    bottom: -29%;
   }
   @media (max-width: 1366px) {
     font-size: 25px;
+    height: 180px;
     letter-spacing: 16.5px;
-    line-height: 35px;
-    margin-top: -3%;
+    line-height: 40px;
+    margin-top: 34%;
+    bottom: -30%;
   }
 `;
 
@@ -164,10 +167,9 @@ interface IconProps {
 }
 
 export const StyledIcon = styled.img<IconProps>`
-  position: relative;
   width: ${(props) =>
     props.type === 'Sunny'
-      ? '121px'
+      ? '98px'
       : props.type === 'Cloud'
         ? '115px'
         : props.type === 'Moon'
@@ -180,20 +182,42 @@ export const StyledIcon = styled.img<IconProps>`
                 ? '73px'
                 : 'inherit'};
 
-  top: -80px;
-  left: 200px;
+  top: 0%;
+  left: 58%;
+  @media (min-width: 1601px) and (max-width: 1920px) {
+    top: 16%;
+    left: 58%;
+  }
+  @media (max-width: 1366px) {
+    font-size: 30px;
+    top: 10%;
+    left: 58%;
+    width: ${(props) =>
+      props.type === 'Sunny'
+        ? '105px'
+        : props.type === 'Cloud'
+          ? '98px'
+          : props.type === 'Moon'
+            ? '75px'
+            : props.type === 'Rainbow'
+              ? '115px'
+              : props.type === 'Rainy'
+                ? '95px'
+                : props.type === 'Snow'
+                  ? '56px'
+                  : 'inherit'};
+  }
 `;
 
 export const StyledDrawingDayText = styled.div<TextProps>`
-  position: relative;
   color: #672909;
   font-family: SSMullaeler;
   font-size: 34px;
   font-style: normal;
   font-weight: 400;
   line-height: 43.674px;
-  top: -120px;
-  left: 340px;
+  top: 15%;
+  left: 23%;
 
   @media (min-width: 1601px) and (max-width: 1920px) {
     font-size: 40px;
@@ -201,6 +225,8 @@ export const StyledDrawingDayText = styled.div<TextProps>`
   }
   @media (max-width: 1366px) {
     font-size: 30px;
+    top: -32px;
+    left: 24%;
   }
 `;
 
@@ -209,11 +235,30 @@ interface SelectBtnProps {
 }
 
 export const StyledSelectBtn = styled.img<SelectBtnProps>`
-  position: absolute;
+  position: fixed;
   bottom: 5%;
   right: 8%;
   width: 140px;
   z-index: 900px;
   cursor: ${(props) => (props.valid ? 'pointer' : 'not-allowed')};
   pointer-events: ${(props) => (props.valid ? 'auto' : 'none')};
+`;
+
+export const StyledDaySelectContainer = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  align-items: center;
+  top: 110px;
+  left: 58%;
+  @media (min-width: 1601px) and (max-width: 1920px) {
+    top: 140px;
+    left: 58%;
+  }
+  @media (max-width: 1366px) {
+    top: 85px;
+    left: 58%;
+  }
+  cursor: pointer;
 `;
