@@ -1,22 +1,22 @@
 import styled from 'styled-components';
 
 export const StyledBackground = styled.div`
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.39);
-  z-index: 9999px;
-  top: 0%;
+  z-index: 9999;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
 `;
 
 export const StyledCardClip = styled.img`
   width: 817px;
-  z-index: 9999px;
+  z-index: 9000;
 
   @media (max-width: 1600px) {
     /* width: 700px; */

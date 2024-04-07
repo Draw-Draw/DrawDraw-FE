@@ -1,46 +1,47 @@
 import { useRecoilValue } from 'recoil';
-import { useCallback, useEffect } from 'react';
+// import { useCallback, useEffect } from 'react';
 import { StyledBackground, StyledCardClip } from './CommonModal.style';
 import CardClip from '../../assets/CardClip.png';
 import { PublicModal } from './ModalType/PublicModal/PublicModal';
 import { GoDrawModal } from './ModalType/GoDrawModal/GoDrawModal';
 import { modalTypeState } from '../../recoil/modalType';
 import { WeatherModal } from './ModalType/WeatherModal/WeatherModal';
+import { ShareModal } from './ModalType/ShareModal/ShareModal';
+import { StampModal } from './ModalType/StampModal/StampModal';
+import { CommentModal } from './ModalType/CommentModal/CommentModal';
 
 interface CommonModalProps {
   onSelectWeather?: (weather: string) => void;
+  onCloseModal?: () => void;
 }
 
-export const CommonModal = ({ onSelectWeather }: CommonModalProps) => {
+export const CommonModal = ({ onSelectWeather, onCloseModal }: CommonModalProps) => {
   const MODAL_TYPES = {
     PUBLIC: 'PUBLIC',
     GODRAW: 'GODRAW',
     WEATHER: 'WEATHER',
     SHARE: 'SHARE',
+    STAMP: 'STAMP',
+    COMMENT: 'COMMENT',
   };
 
   const modalType = useRecoilValue(modalTypeState);
 
-  const lockScroll = useCallback(() => {
-    document.body.style.cssText = `
-    overflow-y: hidden;
-    `;
-  }, []);
-
-  useEffect(() => {
-    if (modalType) {
-      lockScroll();
-    } else {
-      document.body.style.cssText = '';
+  const handleBackgroundClick = () => {
+    if (onCloseModal) {
+      onCloseModal();
     }
-  }, [modalType, lockScroll]);
+  };
 
   return (
-    <StyledBackground>
-      <StyledCardClip src={CardClip} />
+    <StyledBackground onClick={handleBackgroundClick}>
+      <StyledCardClip src={CardClip} onClick={(e) => e.stopPropagation()} />
       {modalType === MODAL_TYPES.PUBLIC && <PublicModal />}
       {modalType === MODAL_TYPES.GODRAW && <GoDrawModal />}
       {modalType === MODAL_TYPES.WEATHER && <WeatherModal onSelectWeather={onSelectWeather} />}
+      {modalType === MODAL_TYPES.SHARE && <ShareModal />}
+      {modalType === MODAL_TYPES.STAMP && <StampModal />}
+      {modalType === MODAL_TYPES.COMMENT && <CommentModal />}
     </StyledBackground>
   );
 };
