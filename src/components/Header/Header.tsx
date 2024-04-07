@@ -16,9 +16,10 @@ import {
 
 interface HeaderProps {
   isDrawing: boolean;
+  isTotal?: boolean;
 }
 
-export const Header = ({ isDrawing }: HeaderProps) => {
+export const Header = ({ isDrawing, isTotal }: HeaderProps) => {
   const [isHamburgerClicked, setIsHamburgerClicked] = useState(false);
   const navigate = useNavigate();
 
@@ -29,17 +30,21 @@ export const Header = ({ isDrawing }: HeaderProps) => {
     setIsHamburgerClicked((prev) => !prev);
   };
 
+  const handleGoMy = () => {
+    navigate('/my/1');
+  };
+
   return (
-    <StyledContainer>
-      <StyledLogo src={Logo} />
+    <StyledContainer $isTotal={isTotal}>
+      {!isTotal && <StyledLogo src={Logo} />}
       <StyledBoxBtnContainer>
-        {!isDrawing && <StyledBoxBtn src={DrawBoxBtn} onClick={handleGoDrawing} />}
+        {!isDrawing && !isTotal && <StyledBoxBtn src={DrawBoxBtn} onClick={handleGoDrawing} />}
         {isHamburgerClicked ? (
           <>
             <StyledBoxBtn src={XBtn} onClick={handleClickedHamburger} />
-            <StyledMenuDropDown $isDrawing={isDrawing}>
+            <StyledMenuDropDown $isDrawing={isDrawing} $isTotal={isTotal}>
               <StyledTextBox>
-                <StyledText>내 일기장</StyledText>
+                <StyledText onClick={handleGoMy}>내 일기장</StyledText>
                 <StyledText>친구 목록</StyledText>
                 <StyledText>로그아웃</StyledText>
               </StyledTextBox>

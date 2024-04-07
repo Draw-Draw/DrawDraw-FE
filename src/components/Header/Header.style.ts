@@ -1,9 +1,12 @@
 import styled from 'styled-components';
 
-export const StyledContainer = styled.div`
+interface ContainerProps {
+  $isTotal?: boolean;
+}
+export const StyledContainer = styled.div<ContainerProps>`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: ${(props) => (props.$isTotal ? 'flex-end' : 'space-between')};
   align-items: center;
   padding-top: 10px;
   padding-left: 55px;
@@ -29,12 +32,13 @@ export const StyledBoxBtn = styled.img`
 
 interface HeaderProps {
   $isDrawing?: boolean;
+  $isTotal?: boolean;
 }
 
 export const StyledMenuDropDown = styled.div<HeaderProps>`
   position: absolute;
   margin-top: 98px;
-  margin-left: ${(props) => (props.$isDrawing ? '-70px' : '6px')};
+  margin-left: ${(props) => (props.$isDrawing ? '-70px' : props.$isTotal ? '-70px' : '6px')};
   width: 140px;
   height: 210px;
   border-radius: 30px;
