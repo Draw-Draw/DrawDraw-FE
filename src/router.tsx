@@ -6,6 +6,9 @@ import { Register } from './pages/Register/Register';
 import { SelectCover } from './components/SelectCover/SelectCover';
 import { CoverRegister } from './components/CoverRegister/CoverRegister';
 import { Drawing } from './pages/Drawing/Drawing';
+import { DetailDiary } from './pages/DetailDiary/DetailDiary';
+import { UserDiaryBoard } from './pages/UserDiaryBoard/UserDiaryBoard';
+import { TotalDiary } from './pages/TotalDiary/TotalDiary';
 
 export function Router() {
   return (
@@ -18,6 +21,9 @@ export function Router() {
         <Route path="write" element={<CoverRegister />} />
       </Route>
       <Route path="/drawing" element={<Drawing />} />
+      <Route path="/detail" element={<DetailDiary />} />
+      <Route path="/my/:id" element={<UserDiaryBoard />} />
+      <Route path="/diary/:id/:diaryid" element={<TotalDiary />} />
     </Routes>
   );
 }
