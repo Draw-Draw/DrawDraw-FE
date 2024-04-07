@@ -6,6 +6,7 @@ export const StyledModalTextContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 9px;
+  z-index: 9999;
 `;
 
 export const StyledTitleText = styled.div`
