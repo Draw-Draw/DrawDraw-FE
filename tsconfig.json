@@ -20,5 +20,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["**/*.ts", "**/*.tsx", ".eslintrc.js"]
+  "include": ["**/*.ts", "**/*.tsx", ".eslintrc.ts"]
 }

@@ -14,6 +14,9 @@ import DisabledSelectBtn from '../../assets/buttons/DisabledSelectBtn.svg';
 import { useFormInput } from '../../hook/useFormInput';
 import { CommonModal } from '../Modal/CommonModal';
 import { useSetModalType } from '../../hook/useSetModalType';
+import { useRecoilState } from 'recoil';
+import { PostDiaryState } from '../../recoil/PostDiaryState';
+import { DiaryBookType } from '../../types/DiaryBook.type';
 
 export const CoverRegister = () => {
   const [inputTitleValue, handleInputTitleChange] = useFormInput('');
@@ -21,6 +24,7 @@ export const CoverRegister = () => {
   const [inputNameValue, handleInputNameChange] = useFormInput('');
   const [modalOpen, setModalOpen] = useState(false);
   const setModalType = useSetModalType();
+  const [postDiaryState, setPostDiaryState] = useRecoilState(PostDiaryState);
 
   useEffect(() => {
     setModalOpen(false);
@@ -35,6 +39,18 @@ export const CoverRegister = () => {
     inputTitleValue.trim().length > 0 &&
     inputSchoolValue.trim().length > 0 &&
     inputNameValue.trim().length > 0;
+
+  const handleSubmit = () => {
+    setPostDiaryState((prevPostDiaryState: DiaryBookType) => ({
+      ...prevPostDiaryState,
+      diaryName: inputTitleValue,
+      group: inputSchoolValue,
+      owner: inputNameValue,
+      open: true,
+    }));
+
+    handleOpenModal();
+  };
 
   return (
     <StyledContainer>
@@ -59,7 +75,7 @@ export const CoverRegister = () => {
       <StyledSelectBtn
         src={validBtn ? SelectBtn : DisabledSelectBtn}
         valid={validBtn}
-        onClick={handleOpenModal}
+        onClick={handleSubmit}
       />
       {modalOpen && <CommonModal />}
     </StyledContainer>
