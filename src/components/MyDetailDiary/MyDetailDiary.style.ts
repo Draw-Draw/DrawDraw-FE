@@ -167,7 +167,7 @@ export const StyledIcon = styled.img<IconProps>`
 
 export const StyledDiaryWeatherSelectText = styled.div`
   position: absolute;
-  width: 100px;
+  width: 180px;
   z-index: 10000;
   color: #672909;
   font-family: SSMullaeler;

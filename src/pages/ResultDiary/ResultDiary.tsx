@@ -20,7 +20,6 @@ import { ResultDiaryType } from '../../types/ResultDiary.type';
 export const ResultDiary = () => {
   const { diarybookid, diaryid } = useParams<{ diarybookid: string; diaryid: string }>();
   const [isValue, setIsValue] = useState<number>(3);
-  const [isMy] = useState(true);
   const [isComment, setIsComment] = useState(false);
   const [diaryData, setDiaryData] = useState<ResultDiaryType | null>(null);
 
@@ -55,7 +54,7 @@ export const ResultDiary = () => {
       <StyledDiaryContainer>
         {!isComment ? (
           <>
-            {isMy ? (
+            {diaryData?.isMine ? (
               <MyDetailDiary isData={{ ...diaryData }} />
             ) : (
               <NotMineDetailDiary onSelectMode={handleChangeMode} />

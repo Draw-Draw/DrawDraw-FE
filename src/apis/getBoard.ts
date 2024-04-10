@@ -1,7 +1,7 @@
 import { client } from './client';
 
 export const getBoard = async () => {
-  const response = await client.post(`/api/v1/boards`);
+  const response = await client.get(`/api/v1/boards`);
 
-  return response.data;
+  return response.data.data.diaryMainViewResponses;
 };
