@@ -27,7 +27,7 @@ export const PostTxt2Img = async ({
   };
 
   const response = await axios.post(
-    'https://a2808beebac145a77b.gradio.live/sdapi/v1/txt2img',
+    'http://127.0.0.1:7860/sdapi/v1/txt2img',
     requestData,
     {
       headers: {

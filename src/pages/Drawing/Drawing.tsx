@@ -38,6 +38,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { postPrompt } from '../..//apis/postPrompt';
 import { postImage } from '../../apis/postImage';
 import { PostTxt2Img } from '../../apis/postTxt2Img';
+import { postSDOption } from '../../apis/postOptions';
+import { getOptions } from '../../apis/getOptions';
 
 export const Drawing = () => {
   const { diarybookid } = useParams();
@@ -65,6 +67,7 @@ export const Drawing = () => {
   };
 
   useEffect(() => {
+    getOptions();
     setModalOpen(false);
     setModalType('WEATHER');
   }, []);
@@ -138,6 +141,7 @@ export const Drawing = () => {
       if (canvasRef.current && canvasRef.current.isEmpty()) {
         console.log('?');
         // 캔버스에 그림이 없으면 텍스트를 그림으로 변환하여 API 호출
+        await postSDOption();
         const response = await PostTxt2Img({ prompt });
         console.log(response);
         fullDataURL = 'data:image/png;base64,' + response;
@@ -155,6 +159,7 @@ export const Drawing = () => {
       } else {
         // 캔버스에 그림이 있으면 img2img API 호출
         console.log('??');
+        await postSDOption();
         const response = await PostImg2Img({ init_images: [imageURL], prompt });
         const encodingString = response.replace(/^"|"$/g, '');
         fullDataURL = 'data:image/png;base64,' + response;
