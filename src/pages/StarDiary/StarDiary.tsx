@@ -4,11 +4,10 @@ import styled from 'styled-components';
 import {
   StyledContainer,
   StyledDiaryContainer,
-  // StyledDrawingBook,
   StyledPageSlide,
   StyledRangeContainer,
   StyledRangeText,
-} from './TotalDiary.style';
+} from './StarDiary.style';
 import { Header } from '../../components/Header/Header';
 // import EmptySketchBook from '../../assets/EmptySketchBook.png';
 import { MyDetailDiary } from '../../components/MyDetailDiary/MyDetailDiary';
@@ -19,7 +18,7 @@ const Btn = styled.button`
   z-index: 9999;
 `;
 
-export const TotalDiary = () => {
+export const StarDiary = () => {
   // const { id, diaryid } = useParams();
   const [isValue, setIsValue] = useState<number>(3);
   const [isMy] = useState(true);
@@ -42,19 +41,7 @@ export const TotalDiary = () => {
       <StyledDiaryContainer>
         {!isComment ? (
           <>
-            {/* {isMy ? <MyDetailDiary /> : <NotMineDetailDiary onSelectMode={handleChangeMode} />} */}
-            <StyledRangeContainer>
-              <StyledPageSlide
-                type="range"
-                min="1"
-                max={maxValue.toString()}
-                defaultValue={isValue.toString()}
-                onChange={handleChange}
-              />
-              <StyledRangeText>
-                {isValue}/{maxValue}
-              </StyledRangeText>
-            </StyledRangeContainer>
+            <NotMineDetailDiary onSelectMode={handleChangeMode} />
           </>
         ) : (
           <Comment onSelectMode={handleChangeMode} />

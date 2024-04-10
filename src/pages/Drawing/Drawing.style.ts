@@ -11,6 +11,7 @@ export const StyledContainer = styled.div`
 export const StyledDrawingBook = styled.img`
   position: absolute;
   width: 68vw;
+  z-index: 3;
 `;
 
 export const StyledDrawingContainer = styled.div`
@@ -30,6 +31,7 @@ interface TextProps {
 
 export const StyledDrawingText = styled.div<TextProps>`
   position: relative;
+  z-index: 3;
   color: #672909;
   font-family: SSMullaeler;
   font-size: 34px;
@@ -50,6 +52,7 @@ export const StyledDrawingText = styled.div<TextProps>`
 
 export const StyledDrawingInputContainer = styled.div`
   display: flex;
+  z-index: 3;
   flex-direction: row;
   position: relative;
   color: #672909;
@@ -103,6 +106,7 @@ export const StyledDrawingInput = styled.input<DayInputProps>`
 
 export const StyledDaySelect = styled.div`
   position: relative;
+  z-index: 3;
   color: rgba(103, 41, 9, 0.38);
   font-family: SSMullaeler;
   font-size: 34px;
@@ -125,6 +129,7 @@ export const StyledDaySelect = styled.div`
 
 export const StyledInputDiary = styled.textarea`
   position: relative;
+  z-index: 3;
   width: 80%;
   height: 250px;
   word-wrap: normal;
@@ -167,18 +172,19 @@ interface IconProps {
 }
 
 export const StyledIcon = styled.img<IconProps>`
+  z-index: 3;
   width: ${(props) =>
-    props.type === 'Sunny'
+    props.type === 'SUNNY'
       ? '98px'
-      : props.type === 'Cloud'
+      : props.type === 'CLOUDY'
         ? '115px'
-        : props.type === 'Moon'
+        : props.type === 'MOON'
           ? '92px'
-          : props.type === 'Rainbow'
+          : props.type === 'RAINBOW'
             ? '132px'
-            : props.type === 'Rainy'
+            : props.type === 'RAINY'
               ? '112px'
-              : props.type === 'Snow'
+              : props.type === 'SNOWY'
                 ? '73px'
                 : 'inherit'};
 
@@ -193,23 +199,24 @@ export const StyledIcon = styled.img<IconProps>`
     top: 10%;
     left: 58%;
     width: ${(props) =>
-      props.type === 'Sunny'
+      props.type === 'SUNNY'
         ? '105px'
-        : props.type === 'Cloud'
+        : props.type === 'CLOUDY'
           ? '98px'
-          : props.type === 'Moon'
+          : props.type === 'MOON'
             ? '75px'
-            : props.type === 'Rainbow'
+            : props.type === 'RAINBOW'
               ? '115px'
-              : props.type === 'Rainy'
+              : props.type === 'RAINY'
                 ? '95px'
-                : props.type === 'Snow'
+                : props.type === 'SNOWY'
                   ? '56px'
                   : 'inherit'};
   }
 `;
 
 export const StyledDrawingDayText = styled.div<TextProps>`
+  z-index: 3;
   color: #672909;
   font-family: SSMullaeler;
   font-size: 34px;
@@ -235,16 +242,18 @@ interface SelectBtnProps {
 }
 
 export const StyledSelectBtn = styled.img<SelectBtnProps>`
+  z-index: 3;
   position: fixed;
   bottom: 5%;
   right: 8%;
   width: 140px;
   z-index: 900px;
-  cursor: ${(props) => (props.valid ? 'pointer' : 'not-allowed')};
-  pointer-events: ${(props) => (props.valid ? 'auto' : 'none')};
+  /* cursor: ${(props) => (props.valid ? 'pointer' : 'not-allowed')};
+  pointer-events: ${(props) => (props.valid ? 'auto' : 'none')}; */
 `;
 
 export const StyledDaySelectContainer = styled.div`
+  z-index: 3;
   position: absolute;
   display: flex;
   flex-direction: row;

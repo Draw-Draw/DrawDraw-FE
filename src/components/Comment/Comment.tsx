@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import CommentSketchBook from '../../assets/CommentSketchBook.svg';
 import {
+  StyledBookMarked,
+  StyledBookMarkedContainer,
   StyledComment,
   StyledCommentBook,
   StyledCommentContainer,
@@ -17,8 +19,13 @@ import GreenStamp from '../../assets/Stamps/GreenStamp.svg';
 import PlusBtn from '../../assets/buttons/PlusBtn.svg';
 import { CommonModal } from '../Modal/CommonModal';
 import { useSetModalType } from '../../hook/useSetModalType';
+import GoDiaryBookMark from '../../assets/bookmarks/GoDiaryBookMark.svg';
 
-export const Comment = () => {
+interface CommentProps {
+  onSelectMode: () => void;
+}
+
+export const Comment = ({ onSelectMode }: CommentProps) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const setModalType = useSetModalType();
 
@@ -73,6 +80,9 @@ export const Comment = () => {
         </StyledComment>
         <StyledPlusBtn src={PlusBtn} onClick={handleOpenModal} />
       </StyledCommentContainer>
+      <StyledBookMarkedContainer>
+        <StyledBookMarked src={GoDiaryBookMark} onClick={onSelectMode} />
+      </StyledBookMarkedContainer>
       {isOpenModal && <CommonModal />}
     </>
   );

@@ -16,6 +16,7 @@ export const StyledContainer = styled.div<ContainerProps>`
 export const StyledLogo = styled.img`
   width: 204px;
   height: 72.6px;
+  cursor: pointer;
 `;
 
 export const StyledBoxBtnContainer = styled.div`

@@ -2,9 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import { Carousel } from '../common/Button/Carousel/Carousel';
 import { StyledSelectBtn, StyledTitle } from './SelectCover.style';
 import SelectBtn from '../../assets/buttons/SelectBtn.svg';
+import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { CoverTypeState } from '../../recoil/CoverTypeState';
 
 export const SelectCover = () => {
   const navigate = useNavigate();
+  const [coverType, setCoverType] = useRecoilState(CoverTypeState);
 
   const goCoverWrite = () => {
     navigate(`write`);

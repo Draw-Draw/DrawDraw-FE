@@ -35,12 +35,12 @@ export const WeatherModal = ({ onSelectWeather }: Props) => {
     <StyledModalTextContainer>
       <StyledTitleText>오늘의 날씨는?</StyledTitleText>
       <StyledWeatherGrid>
-        <StyledSunnyIcon src={Sunny} onClick={() => handleWeatherClick('Sunny')} />
-        <StyledCloudIcon src={Cloud} onClick={() => handleWeatherClick('Cloud')} />
-        <StyledMoonIcon src={Moon} onClick={() => handleWeatherClick('Moon')} />
-        <StyledRainbowIcon src={Rainbow} onClick={() => handleWeatherClick('Rainbow')} />
-        <StyledRainyIcon src={Rainy} onClick={() => handleWeatherClick('Rainy')} />
-        <StyledSnowIcon src={Snow} onClick={() => handleWeatherClick('Snow')} />
+        <StyledSunnyIcon src={Sunny} onClick={() => handleWeatherClick('SUNNY')} />
+        <StyledCloudIcon src={Cloud} onClick={() => handleWeatherClick('CLOUDY')} />
+        <StyledMoonIcon src={Moon} onClick={() => handleWeatherClick('MOON')} />
+        <StyledRainbowIcon src={Rainbow} onClick={() => handleWeatherClick('RAINBOW')} />
+        <StyledRainyIcon src={Rainy} onClick={() => handleWeatherClick('RAINY')} />
+        <StyledSnowIcon src={Snow} onClick={() => handleWeatherClick('SNOWY')} />
       </StyledWeatherGrid>
     </StyledModalTextContainer>
   );

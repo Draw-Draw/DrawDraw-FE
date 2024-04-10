@@ -57,3 +57,20 @@ export const StyledPlusBtn = styled.img`
   z-index: 3;
   cursor: pointer;
 `;
+
+export const StyledBookMarkedContainer = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-left: 115%;
+  margin-top: 11%;
+`;
+
+export const StyledBookMarked = styled.img`
+  width: 190px;
+  cursor: pointer;
+  &:hover {
+    margin-left: 10%;
+  }
+`;

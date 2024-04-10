@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import { CommonModal } from '../Modal/CommonModal';
 import {
   StyledBookMarked,
   StyledBookMarkedContainer,
@@ -8,39 +6,21 @@ import {
   StyledDrawingContainer,
 } from './NotMineDetailDiary.style';
 import DrawingBook from '../../assets/DrawingEmptySketchBook.png';
-import PutBookMark from '../../assets/bookmarks/PutBookMark.svg';
-import ShareBookMark from '../../assets/bookmarks/ShareBookMark.svg';
-// import SaveBookMark from '../../assets/bookmarks/SaveBookMark.svg';
-import { useSetModalType } from '../../hook/useSetModalType';
+import CommentBookMark from '../../assets/bookmarks/CommentBookMark.svg';
 
-export const NotMineDetailDiary = () => {
-  const [isOpenShareModal, setIsOpenShareModal] = useState(false);
-  const setModalType = useSetModalType();
+interface NotMineDetailDiaryProps {
+  onSelectMode: () => void;
+}
 
-  useEffect(() => {
-    setIsOpenShareModal(false);
-    setModalType('SHARE');
-  }, []);
-
-  const handleShareOpenModal = () => {
-    setIsOpenShareModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsOpenShareModal(false);
-  };
-
+export const NotMineDetailDiary = ({ onSelectMode }: NotMineDetailDiaryProps) => {
   return (
     <StyledContainer>
       <StyledDrawingContainer>
         <StyledDrawingBook src={DrawingBook} />
         <StyledBookMarkedContainer>
-          <StyledBookMarked src={PutBookMark} />
-          <StyledBookMarked src={ShareBookMark} onClick={handleShareOpenModal} />
-          {/* <StyledBookMarked src={SaveBookMark} /> */}
+          <StyledBookMarked src={CommentBookMark} onClick={onSelectMode} />
         </StyledBookMarkedContainer>
       </StyledDrawingContainer>
-      {isOpenShareModal && <CommonModal onCloseModal={() => handleCloseModal()} />}
     </StyledContainer>
   );
 };

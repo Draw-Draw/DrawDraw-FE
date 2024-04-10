@@ -7,7 +7,7 @@ import {
   StyledGreenBoard,
   StyledTodayDiaryGrid,
 } from './UserDiaryBoard.style';
-import EmptySektchBook from '../../assets/EmptySketchBook.png';
+import EmptySketchBook from '../../assets/EmptySketchBook.png';
 import GreenBoard from '../../assets/MyGreenBoard.svg';
 
 export const UserDiaryBoard = () => {
@@ -19,7 +19,7 @@ export const UserDiaryBoard = () => {
         <StyledGreenBoard src={GreenBoard} />
         <StyledTodayDiaryGrid>
           {Array.from({ length: 6 }).map((_, index) => (
-            <StyledEmptySketchBook src={EmptySektchBook} key={index} />
+            <StyledEmptySketchBook src={EmptySketchBook} key={index} />
           ))}
         </StyledTodayDiaryGrid>
       </StyledBoardContainer>

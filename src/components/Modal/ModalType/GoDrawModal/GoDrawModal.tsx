@@ -8,16 +8,31 @@ import {
 } from './GoDrawModal.style';
 import YesBtn from '../../../../assets/buttons/YesBtn.svg';
 import NoBtn from '../../../../assets/buttons/NoBtn.svg';
+import { postDiaryBook } from '../../../../apis/postDiaryBook';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { PostDiaryState } from '../../../../recoil/PostDiaryState';
+import { SelectDiaryBookState } from '../../../../recoil/SelectDiaryBookState';
 
 export const GoDrawModal = () => {
   const navigate = useNavigate();
+  const postDiaryState = useRecoilValue(PostDiaryState);
+  const [diaryBookState, setDiaryBookState] = useRecoilState(SelectDiaryBookState);
 
-  const handleGoMain = () => {
-    navigate('/');
+  const handleGoDraw = async () => {
+    try {
+      const response = await postDiaryBook(postDiaryState);
+      navigate(`/drawing/${response}`);
+    } catch (error) {
+      console.error('postDiaryBook 요청 중 오류 발생:', error);
+    }
   };
 
-  const handleGoDraw = () => {
-    navigate('/drawing');
+  const handleGoMain = async () => {
+    try {
+      navigate(`/`);
+    } catch (error) {
+      console.error('postDiaryBook 요청 중 오류 발생:', error);
+    }
   };
   return (
     <StyledModalTextContainer>

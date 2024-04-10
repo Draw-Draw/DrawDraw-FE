@@ -23,9 +23,18 @@ export const Header = ({ isDrawing, isTotal }: HeaderProps) => {
   const [isHamburgerClicked, setIsHamburgerClicked] = useState(false);
   const navigate = useNavigate();
 
-  const handleGoDrawing = () => {
-    navigate('/drawing');
+  const handleGoHome = () => {
+    navigate('/');
   };
+
+  const handleGoDrawing = () => {
+    navigate('/drawing/:diarybookid');
+  };
+
+  const handleGoNewDiary = () => {
+    navigate('/register');
+  };
+
   const handleClickedHamburger = () => {
     setIsHamburgerClicked((prev) => !prev);
   };
@@ -36,7 +45,7 @@ export const Header = ({ isDrawing, isTotal }: HeaderProps) => {
 
   return (
     <StyledContainer $isTotal={isTotal}>
-      {!isTotal && <StyledLogo src={Logo} />}
+      {!isTotal && <StyledLogo src={Logo} onClick={handleGoHome} />}
       <StyledBoxBtnContainer>
         {!isDrawing && !isTotal && <StyledBoxBtn src={DrawBoxBtn} onClick={handleGoDrawing} />}
         {isHamburgerClicked ? (
@@ -45,7 +54,7 @@ export const Header = ({ isDrawing, isTotal }: HeaderProps) => {
             <StyledMenuDropDown $isDrawing={isDrawing} $isTotal={isTotal}>
               <StyledTextBox>
                 <StyledText onClick={handleGoMy}>내 일기장</StyledText>
-                <StyledText>친구 목록</StyledText>
+                <StyledText onClick={handleGoNewDiary}>새 일기장</StyledText>
                 <StyledText>로그아웃</StyledText>
               </StyledTextBox>
             </StyledMenuDropDown>

@@ -8,13 +8,30 @@ import {
 import PublicBtn from '../../../../assets/buttons/PublicBtn.svg';
 import PrivateBtn from '../../../../assets/buttons/PrivateBtn.svg';
 import { useSetModalType } from '../../../../hook/useSetModalType';
+import { useRecoilState } from 'recoil';
+import { PostDiaryState } from '../../../../recoil/PostDiaryState';
+import { DiaryBookType } from '../../../../types/DiaryBook.type';
 
 export const PublicModal = () => {
   const setModalType = useSetModalType();
+  const [postDiaryState, setPostDiaryState] = useRecoilState(PostDiaryState);
 
-  const handleModalType = () => {
+  const handleModalType = (openValue: boolean) => {
+    setPostDiaryState((prevPostDiaryState: DiaryBookType) => ({
+      ...prevPostDiaryState,
+      open: openValue,
+    }));
     setModalType('GODRAW');
   };
+
+  const handlePublicBtnClick = () => {
+    handleModalType(true);
+  };
+
+  const handlePrivateBtnClick = () => {
+    handleModalType(false);
+  };
+
   return (
     <StyledModalTextContainer>
       <div>
@@ -26,8 +43,8 @@ export const PublicModal = () => {
         </StyledSubText>
       </div>
       <StyledBtnContainer>
-        <StyledBtn src={PublicBtn} onClick={handleModalType} />
-        <StyledBtn src={PrivateBtn} onClick={handleModalType} />
+        <StyledBtn src={PublicBtn} onClick={handlePublicBtnClick} />
+        <StyledBtn src={PrivateBtn} onClick={handlePrivateBtnClick} />
       </StyledBtnContainer>
     </StyledModalTextContainer>
   );
