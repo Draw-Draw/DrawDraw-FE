@@ -18,7 +18,7 @@ export const Redirection = () => {
               Authorization: code,
             },
           });
-          if (response.data.data.isExist === 'false') {
+          if (response.data.data.isExist === false) {
             navigate('/onboarding');
           } else {
             navigate('/');

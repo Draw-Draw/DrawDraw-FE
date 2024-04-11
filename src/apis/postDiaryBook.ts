@@ -8,13 +8,22 @@ export const postDiaryBook = async ({
   owner,
   open,
 }: DiaryBookType) => {
-  const response = await client.post('/api/v1/diary-books', {
-    coverType,
-    diaryName,
-    group,
-    owner,
-    open,
-  });
+  const accessToken = localStorage.getItem('accessToken');
+  const response = await client.post(
+    '/api/v1/diary-books',
+    {
+      coverType,
+      diaryName,
+      group,
+      owner,
+      open,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
 
   return response.data.data.diaryBookId;
 };

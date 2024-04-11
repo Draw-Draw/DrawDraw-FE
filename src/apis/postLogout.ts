@@ -1,17 +1,13 @@
 import { client } from './client';
 
-export const getNickname = async (name: string) => {
+export const postLogout = async () => {
   const accessToken = localStorage.getItem('accessToken');
   try {
-    const response = await client.post(
-      '/api/v1/members',
-      { name },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    );
+    const response = await client.post('/api/v1/auth/logout', null, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     console.log(response.data);
     return response.data;
   } catch (error) {

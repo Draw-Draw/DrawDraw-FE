@@ -13,6 +13,7 @@ import {
   StyledText,
   StyledTextBox,
 } from './Header.style';
+import { postLogout } from '../../apis/postLogout';
 
 interface HeaderProps {
   isDrawing: boolean;
@@ -43,6 +44,11 @@ export const Header = ({ isDrawing, isTotal }: HeaderProps) => {
     navigate('/my/1');
   };
 
+  const handleLogout = () => {
+    postLogout();
+    navigate('/landing');
+  };
+
   return (
     <StyledContainer $isTotal={isTotal}>
       {!isTotal && <StyledLogo src={Logo} onClick={handleGoHome} />}
@@ -55,7 +61,7 @@ export const Header = ({ isDrawing, isTotal }: HeaderProps) => {
               <StyledTextBox>
                 <StyledText onClick={handleGoMy}>내 일기장</StyledText>
                 <StyledText onClick={handleGoNewDiary}>새 일기장</StyledText>
-                <StyledText>로그아웃</StyledText>
+                <StyledText onClick={handleLogout}>로그아웃</StyledText>
               </StyledTextBox>
             </StyledMenuDropDown>
           </>
