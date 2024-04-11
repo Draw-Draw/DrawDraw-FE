@@ -19,7 +19,7 @@ import { PostDiaryState } from '../../recoil/PostDiaryState';
 import { DiaryBookType } from '../../types/DiaryBook.type';
 
 import PINK from '../../assets/Cover/PINK.svg';
-import ORANGE from '../../assets/Cover/ORANGE.svg';
+import YELLOW from '../../assets/Cover/ORANGE.svg';
 import GREEN from '../../assets/Cover/GREEN.svg';
 import BLUE from '../../assets/Cover/BLUE.svg';
 import PURPLE from '../../assets/Cover/PURPLE.svg';
@@ -36,7 +36,7 @@ export const CoverRegister = () => {
 
   const coverImages: Record<CoverType, string> = {
     PINK: PINK,
-    ORANGE: ORANGE,
+    YELLOW: YELLOW,
     GREEN: GREEN,
     BLUE: BLUE,
     PURPLE: PURPLE,

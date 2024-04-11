@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PINK from '../../../../assets/Cover/PINK.svg';
-import ORANGE from '../../../../assets/Cover/ORANGE.svg';
+import YELLOW from '../../../../assets/Cover/ORANGE.svg';
 import GREEN from '../../../../assets/Cover/GREEN.svg';
 import BLUE from '../../../../assets/Cover/BLUE.svg';
 import PURPLE from '../../../../assets/Cover/PURPLE.svg';
@@ -19,7 +19,7 @@ export interface CarouselProps {
 export const Carousel = () => {
   const slider = [
     { id: 1, type: 'PINK', src: `${PINK}` },
-    { id: 2, type: 'ORANGE', src: `${ORANGE}` },
+    { id: 2, type: 'YELLOW', src: `${YELLOW}` },
     { id: 3, type: 'GREEN', src: `${GREEN}` },
     { id: 4, type: 'BLUE', src: `${BLUE}` },
     { id: 5, type: 'PURPLE', src: `${PURPLE}` },
