@@ -127,6 +127,7 @@ export const Canvas = forwardRef<CanvasRef, CanvasProps>((props, ref) => {
           onMouseDown={() => setPainting(true)}
           onMouseUp={() => setPainting(false)}
           onMouseMove={(e) => drawFn(e)}
+          onMouseLeave={() => setPainting(false)}
         />
       </StyledCanvas>
       {imageURL && <img src={imageURL} alt="" aria-hidden="true" />}
