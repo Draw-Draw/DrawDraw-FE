@@ -18,8 +18,10 @@ import { getDiary } from '../../apis/getDiary';
 import { ResultDiaryType } from '../../types/ResultDiary.type';
 
 export const ResultDiary = () => {
-  const { diarybookid, diaryid } = useParams<{ diarybookid: string; diaryid: string }>();
-  const [isValue, setIsValue] = useState<number>(3);
+  const { diarybookid, diaryid } = useParams<{
+    diarybookid: string | undefined;
+    diaryid: string | undefined;
+  }>();
   const [isComment, setIsComment] = useState(false);
   const [diaryData, setDiaryData] = useState<ResultDiaryType | null>(null);
 
@@ -37,11 +39,6 @@ export const ResultDiary = () => {
     }
   }, [diarybookid, diaryid]);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = parseInt(event.target.value, 10);
-    setIsValue(newValue);
-  };
-
   const handleChangeMode = () => {
     setIsComment((prev) => !prev);
     console.log(isComment);
@@ -55,13 +52,13 @@ export const ResultDiary = () => {
         {!isComment ? (
           <>
             {diaryData?.isMine ? (
-              <MyDetailDiary isData={{ ...diaryData }} />
+              <MyDetailDiary isData={{ ...diaryData }} onSelectMode={handleChangeMode} />
             ) : (
-              <NotMineDetailDiary onSelectMode={handleChangeMode} />
+              <NotMineDetailDiary isData={{ ...diaryData }} onSelectMode={handleChangeMode} />
             )}
           </>
         ) : (
-          <Comment onSelectMode={handleChangeMode} />
+          <Comment onSelectMode={handleChangeMode} diarybookid={diarybookid} diaryid={diaryid} />
         )}
       </StyledDiaryContainer>
     </StyledContainer>

@@ -20,18 +20,23 @@ import PlusBtn from '../../assets/buttons/PlusBtn.svg';
 import { CommonModal } from '../Modal/CommonModal';
 import { useSetModalType } from '../../hook/useSetModalType';
 import GoDiaryBookMark from '../../assets/bookmarks/GoDiaryBookMark.svg';
+import { getComment } from '../..//apis/getComment';
 
 interface CommentProps {
   onSelectMode: () => void;
+  diarybookid: string | undefined;
+  diaryid: string | undefined;
 }
 
-export const Comment = ({ onSelectMode }: CommentProps) => {
+export const Comment = ({ onSelectMode, diarybookid, diaryid }: CommentProps) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const setModalType = useSetModalType();
 
   useEffect(() => {
     setIsOpenModal(false);
     setModalType('STAMP');
+    const response = getComment(diaryid);
+    console.log(response);
   }, []);
 
   const handleOpenModal = () => {

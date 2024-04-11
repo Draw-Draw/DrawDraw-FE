@@ -18,6 +18,7 @@ import {
 import DrawingBook from '../../assets/DrawingEmptySketchBook.png';
 import PutBookMark from '../../assets/bookmarks/PutBookMark.svg';
 import ShareBookMark from '../../assets/bookmarks/ShareBookMark.svg';
+import CommentBookMark from '../../assets/bookmarks/CommentBookMark.svg';
 import { useSetModalType } from '../../hook/useSetModalType';
 import { ResultDiaryType } from '../../types/ResultDiary.type';
 
@@ -28,7 +29,12 @@ import Rainbow from '../../assets/weathers/Rainbow.png';
 import Rainy from '../../assets/weathers/Rainy.png';
 import Snow from '../../assets/weathers/Snow.png';
 
-export const MyDetailDiary = ({ isData }: { isData: ResultDiaryType }) => {
+interface MineDetailDiaryProps {
+  isData: ResultDiaryType;
+  onSelectMode: () => void;
+}
+
+export const MyDetailDiary = ({ isData, onSelectMode }: MineDetailDiaryProps) => {
   const [isOpenShareModal, setIsOpenShareModal] = useState(false);
   const setModalType = useSetModalType();
 
@@ -108,6 +114,7 @@ export const MyDetailDiary = ({ isData }: { isData: ResultDiaryType }) => {
         <StyledBookMarkedContainer>
           <StyledBookMarked src={PutBookMark} />
           <StyledBookMarked src={ShareBookMark} onClick={handleShareOpenModal} />
+          <StyledBookMarked src={CommentBookMark} onClick={onSelectMode} />
         </StyledBookMarkedContainer>
       </StyledDrawingContainer>
       {isOpenShareModal && <CommonModal onCloseModal={() => handleCloseModal()} />}

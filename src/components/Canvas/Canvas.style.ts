@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledCanvas = styled.div`
   position: absolute;
   margin-top: 17%;
-  margin-left: 6%;
+  margin-left: -2%;
   height: 64%;
   /* overflow: hidden; */
   z-index: 3;

@@ -7,13 +7,17 @@ export const StyledCommentBook = styled.img`
 `;
 
 export const StyledCommentContainer = styled.div`
-  position: relative;
+  position: absolute;
+  width: 68vw;
   margin-top: 110px;
   display: flex;
   flex-direction: column;
   gap: 2px;
   z-index: 3;
   align-items: center;
+  @media (min-width: 1601px) and (max-width: 1920px) {
+    margin-top: 140px;
+  }
 `;
 
 export const StyledComment = styled.div`
@@ -28,10 +32,16 @@ export const StyledCommentText = styled.div`
   flex-direction: column;
   text-align: left;
   width: 680px;
+  @media (min-width: 1601px) and (max-width: 1920px) {
+    width: 880px;
+  }
 `;
 
 export const StyledStamp = styled.img`
-  width: 124px;
+  width: 15%;
+  @media (min-width: 1601px) and (max-width: 1920px) {
+    width: 16%;
+  }
 `;
 
 export const StyledNickname = styled.div`
@@ -41,6 +51,9 @@ export const StyledNickname = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 43.674px;
+  @media (min-width: 1601px) and (max-width: 1920px) {
+    font-size: 34px;
+  }
 `;
 
 export const StyledText = styled.div`
@@ -50,6 +63,9 @@ export const StyledText = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 28px; /* 128.453% */
+  @media (min-width: 1601px) and (max-width: 1920px) {
+    font-size: 34px;
+  }
 `;
 
 export const StyledPlusBtn = styled.img`

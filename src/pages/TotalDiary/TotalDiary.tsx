@@ -14,13 +14,17 @@ import { Header } from '../../components/Header/Header';
 import { MyDetailDiary } from '../../components/MyDetailDiary/MyDetailDiary';
 import { NotMineDetailDiary } from '../../components/NotMineDetailDiary/NotMineDetailDiary';
 import { Comment } from '../../components/Comment/Comment';
+import { useParams } from 'react-router-dom';
 
 const Btn = styled.button`
   z-index: 9999;
 `;
 
 export const TotalDiary = () => {
-  // const { id, diaryid } = useParams();
+  const { diarybookid, diaryid } = useParams<{
+    diarybookid: string | undefined;
+    diaryid: string | undefined;
+  }>();
   const [isValue, setIsValue] = useState<number>(3);
   const [isMy] = useState(true);
   const [isComment, setIsComment] = useState(false);
@@ -57,7 +61,7 @@ export const TotalDiary = () => {
             </StyledRangeContainer>
           </>
         ) : (
-          <Comment onSelectMode={handleChangeMode} />
+          <Comment onSelectMode={handleChangeMode} diarybookid={diarybookid} diaryid={diaryid} />
         )}
       </StyledDiaryContainer>
     </StyledContainer>

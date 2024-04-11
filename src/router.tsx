@@ -9,7 +9,6 @@ import { Drawing } from './pages/Drawing/Drawing';
 import { DetailDiary } from './pages/DetailDiary/DetailDiary';
 import { UserDiaryBoard } from './pages/UserDiaryBoard/UserDiaryBoard';
 import { TotalDiary } from './pages/TotalDiary/TotalDiary';
-import { StarDiary } from './pages/StarDiary/StarDiary';
 import { Redirection } from './pages/Redirection/Redirection';
 import { ResultDiary } from './pages/ResultDiary/ResultDiary';
 
@@ -18,7 +17,7 @@ export function Router() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/landing" element={<Landing />} />
-      <Route path="/kakao/callback" element={<Redirection />} />
+      <Route path="/auth" element={<Redirection />} />
       <Route path="/onboarding" element={<Onboarding />} />
       <Route path="/register" element={<Register />}>
         <Route path="" element={<SelectCover />} />
@@ -29,7 +28,6 @@ export function Router() {
       <Route path="/my/:id" element={<UserDiaryBoard />} />
       <Route path="/diary/:diarybookid/:diaryid" element={<ResultDiary />} />
       <Route path="/diary/:diarybookid" element={<TotalDiary />} />
-      <Route path="/diary/:id" element={<StarDiary />} />
     </Routes>
   );
 }

@@ -54,7 +54,7 @@ export const StyledInputColor = styled.input`
 
 export const StyledRange = styled.input`
   position: absolute;
-  transform: rotate(90deg);
+  transform: rotate(-90deg);
   right: -110px;
   top: 150px;
   accent-color: #4f1d03;
