@@ -38,8 +38,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { postPrompt } from '../..//apis/postPrompt';
 import { postImage } from '../../apis/postImage';
 import { PostTxt2Img } from '../../apis/postTxt2Img';
-import { postSDOption } from '../../apis/postOptions';
-import { getOptions } from '../../apis/getOptions';
+import { Loading } from '../../components/Loading/Loading';
 
 export const Drawing = () => {
   const { diarybookid } = useParams();
@@ -53,7 +52,7 @@ export const Drawing = () => {
   const [isPen, setIsPen] = useState(true);
   const [imageURL, setImageURL] = useRecoilState<string>(ImageUrlState);
   const [diaryContent, setDiaryContent] = useState('');
-  const [diaryBookState, setDiaryBookState] = useRecoilState(SelectDiaryBookState);
+  const [isLoading, setIsLoading] = useState(false);
   const setModalType = useSetModalType();
   const navigate = useNavigate();
 
@@ -67,7 +66,6 @@ export const Drawing = () => {
   };
 
   useEffect(() => {
-    getOptions();
     setModalOpen(false);
     setModalType('WEATHER');
   }, []);
@@ -140,8 +138,8 @@ export const Drawing = () => {
       // 캔버스에 그림이 있는지 확인
       if (canvasRef.current && canvasRef.current.isEmpty()) {
         console.log('?');
+        setIsLoading(true);
         // 캔버스에 그림이 없으면 텍스트를 그림으로 변환하여 API 호출
-        await postSDOption();
         const response = await PostTxt2Img({ prompt });
         console.log(response);
         fullDataURL = 'data:image/png;base64,' + response;
@@ -155,11 +153,12 @@ export const Drawing = () => {
 
         const ImageResponse = await postImage(diarybookid, diaryId, formData);
         console.log(ImageResponse);
+        setIsLoading(false);
         navigate(`/diary/${diarybookid}/${ImageResponse}`);
       } else {
         // 캔버스에 그림이 있으면 img2img API 호출
         console.log('??');
-        await postSDOption();
+        setIsLoading(true);
         const response = await PostImg2Img({ init_images: [imageURL], prompt });
         const encodingString = response.replace(/^"|"$/g, '');
         fullDataURL = 'data:image/png;base64,' + response;
@@ -173,6 +172,7 @@ export const Drawing = () => {
 
         const ImageResponse = await postImage(diarybookid, diaryId, formData);
         console.log(ImageResponse);
+        setIsLoading(false);
         navigate(`/diary/${diarybookid}/${ImageResponse}`);
       }
     } catch (error) {
@@ -181,85 +181,95 @@ export const Drawing = () => {
   };
 
   return (
-    <StyledContainer>
-      <Header isDrawing />
-      <StyledDrawingContainer>
-        <StyledDrawingBook src={DrawingBook} />
-        <StyledDrawingText $isInputText={false} $isDay>
-          날짜
-        </StyledDrawingText>
-        <StyledDrawingInputContainer>
-          <StyledDrawingInput
-            type="isyear"
-            value={inputYearValue}
-            onChange={handleInputYearChange}
-          />
-          <StyledDrawingText $isInputText>년</StyledDrawingText>
-          <StyledDrawingInput
-            type="ismonth"
-            value={inputMonthValue}
-            onChange={handleInputMonthChange}
-          />
-          <StyledDrawingText $isInputText>월</StyledDrawingText>
-          <StyledDrawingInput type="isday" value={inputDayValue} onChange={handleInputDayChange} />
-          <StyledDrawingText $isInputText>일</StyledDrawingText>
-        </StyledDrawingInputContainer>
-        <StyledDrawingText $isInputText={false} $isDay={false}>
-          날씨
-        </StyledDrawingText>
-        {isSelectedWeather ? (
-          <StyledDaySelectContainer onClick={handleOpenModal}>
-            <StyledIcon
-              type={isSelectedWeather}
-              src={
-                isSelectedWeather === 'SUNNY'
-                  ? Sunny
-                  : isSelectedWeather === 'CLOUDY'
-                    ? Cloud
-                    : isSelectedWeather === 'MOON'
-                      ? Moon
-                      : isSelectedWeather === 'RAINBOW'
-                        ? Rainbow
-                        : isSelectedWeather === 'RAINY'
-                          ? Rainy
-                          : isSelectedWeather === 'SNOWY'
-                            ? Snow
-                            : ''
-              }
-              alt={isSelectedWeather}
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <StyledContainer>
+          <Header isDrawing />
+          <StyledDrawingContainer>
+            <StyledDrawingBook src={DrawingBook} />
+            <StyledDrawingText $isInputText={false} $isDay>
+              날짜
+            </StyledDrawingText>
+            <StyledDrawingInputContainer>
+              <StyledDrawingInput
+                type="isyear"
+                value={inputYearValue}
+                onChange={handleInputYearChange}
+              />
+              <StyledDrawingText $isInputText>년</StyledDrawingText>
+              <StyledDrawingInput
+                type="ismonth"
+                value={inputMonthValue}
+                onChange={handleInputMonthChange}
+              />
+              <StyledDrawingText $isInputText>월</StyledDrawingText>
+              <StyledDrawingInput
+                type="isday"
+                value={inputDayValue}
+                onChange={handleInputDayChange}
+              />
+              <StyledDrawingText $isInputText>일</StyledDrawingText>
+            </StyledDrawingInputContainer>
+            <StyledDrawingText $isInputText={false} $isDay={false}>
+              날씨
+            </StyledDrawingText>
+            {isSelectedWeather ? (
+              <StyledDaySelectContainer onClick={handleOpenModal}>
+                <StyledIcon
+                  type={isSelectedWeather}
+                  src={
+                    isSelectedWeather === 'SUNNY'
+                      ? Sunny
+                      : isSelectedWeather === 'CLOUDY'
+                        ? Cloud
+                        : isSelectedWeather === 'MOON'
+                          ? Moon
+                          : isSelectedWeather === 'RAINBOW'
+                            ? Rainbow
+                            : isSelectedWeather === 'RAINY'
+                              ? Rainy
+                              : isSelectedWeather === 'SNOWY'
+                                ? Snow
+                                : ''
+                  }
+                  alt={isSelectedWeather}
+                />
+                <StyledDrawingDayText $isInputText={false}>
+                  {isSelectedWeather === 'SUNNY'
+                    ? '해가 쨍쨍'
+                    : isSelectedWeather === 'CLOUDY'
+                      ? '구름 많아요'
+                      : isSelectedWeather === 'MOON'
+                        ? '별이 빛나는 밤에'
+                        : isSelectedWeather === 'RAINBOW'
+                          ? '일곱 빛깔 무지개'
+                          : isSelectedWeather === 'RAINY'
+                            ? '비가 주륵주륵'
+                            : isSelectedWeather === 'SNOWY'
+                              ? '눈이 펑펑'
+                              : ''}
+                </StyledDrawingDayText>
+              </StyledDaySelectContainer>
+            ) : (
+              <StyledDaySelect onClick={handleOpenModal}>날씨를 선택해주세요</StyledDaySelect>
+            )}
+            <Canvas ref={canvasRef} isPen={isPen} />
+            <StyledInputDiary
+              cols={70}
+              rows={100}
+              wrap="hard"
+              maxLength={100}
+              value={diaryContent}
+              onChange={(e) => setDiaryContent(e.target.value)}
             />
-            <StyledDrawingDayText $isInputText={false}>
-              {isSelectedWeather === 'SUNNY'
-                ? '해가 쨍쨍'
-                : isSelectedWeather === 'CLOUDY'
-                  ? '구름 많아요'
-                  : isSelectedWeather === 'MOON'
-                    ? '별이 빛나는 밤에'
-                    : isSelectedWeather === 'RAINBOW'
-                      ? '일곱 빛깔 무지개'
-                      : isSelectedWeather === 'RAINY'
-                        ? '비가 주륵주륵'
-                        : isSelectedWeather === 'SNOWY'
-                          ? '눈이 펑펑'
-                          : ''}
-            </StyledDrawingDayText>
-          </StyledDaySelectContainer>
-        ) : (
-          <StyledDaySelect onClick={handleOpenModal}>날씨를 선택해주세요</StyledDaySelect>
-        )}
-        <Canvas ref={canvasRef} isPen={isPen} />
-        <StyledInputDiary
-          cols={70}
-          rows={100}
-          wrap="hard"
-          maxLength={100}
-          value={diaryContent}
-          onChange={(e) => setDiaryContent(e.target.value)}
-        />
-        <ToolBar onSelectMode={handlePenMode} isPen={isPen} onClearCanvas={handleClearCanvas} />
-      </StyledDrawingContainer>
-      {modalOpen && <CommonModal onSelectWeather={handleSelectWeather} />}
-      <StyledSelectBtn src={CompleteBtn} onClick={handlePostImg2Img} />
-    </StyledContainer>
+            <ToolBar onSelectMode={handlePenMode} isPen={isPen} onClearCanvas={handleClearCanvas} />
+          </StyledDrawingContainer>
+          {modalOpen && <CommonModal onSelectWeather={handleSelectWeather} />}
+          <StyledSelectBtn src={CompleteBtn} onClick={handlePostImg2Img} />
+        </StyledContainer>
+      )}
+    </>
   );
 };
