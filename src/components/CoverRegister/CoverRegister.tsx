@@ -18,6 +18,12 @@ import { useRecoilState } from 'recoil';
 import { PostDiaryState } from '../../recoil/PostDiaryState';
 import { DiaryBookType } from '../../types/DiaryBook.type';
 
+import PINK from '../../assets/Cover/PINK.svg';
+import ORANGE from '../../assets/Cover/ORANGE.svg';
+import GREEN from '../../assets/Cover/GREEN.svg';
+import BLUE from '../../assets/Cover/BLUE.svg';
+import PURPLE from '../../assets/Cover/PURPLE.svg';
+
 export const CoverRegister = () => {
   const [inputTitleValue, handleInputTitleChange] = useFormInput('');
   const [inputSchoolValue, handleInputSchoolChange] = useFormInput('');
@@ -25,6 +31,16 @@ export const CoverRegister = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const setModalType = useSetModalType();
   const [postDiaryState, setPostDiaryState] = useRecoilState(PostDiaryState);
+
+  type CoverType = DiaryBookType['coverType'];
+
+  const coverImages: Record<CoverType, string> = {
+    PINK: PINK,
+    ORANGE: ORANGE,
+    GREEN: GREEN,
+    BLUE: BLUE,
+    PURPLE: PURPLE,
+  };
 
   useEffect(() => {
     setModalOpen(false);
@@ -55,7 +71,7 @@ export const CoverRegister = () => {
   return (
     <StyledContainer>
       <StyledDiaryContainer>
-        <StyledCover src={EmptySketchBook} />
+        <StyledCover src={coverImages[postDiaryState.coverType]} />
         <StyledDiaryTitleInput
           value={inputTitleValue}
           onChange={handleInputTitleChange}

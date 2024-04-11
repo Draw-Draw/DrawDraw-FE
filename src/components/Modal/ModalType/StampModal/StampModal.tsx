@@ -24,11 +24,11 @@ export const StampModal = () => {
       <StyledTitleText>도장을 선택해주세요!</StyledTitleText>
       <StyledStampGrid>
         <StyledStamp type="blue" src={BlueStamp} onClick={handleModalType} />
-        <StyledStamp type="green" src={GreenStamp} />
-        <StyledStamp type="purple" src={PurpleStamp} />
-        <StyledStamp type="yellow" src={YellowStamp} />
-        <StyledStamp type="red" src={RedStamp} />
-        <StyledStamp type="orange" src={OrangeStamp} />
+        <StyledStamp type="green" src={GreenStamp} onClick={handleModalType} />
+        <StyledStamp type="purple" src={PurpleStamp} onClick={handleModalType} />
+        <StyledStamp type="yellow" src={YellowStamp} onClick={handleModalType} />
+        <StyledStamp type="red" src={RedStamp} onClick={handleModalType} />
+        <StyledStamp type="orange" src={OrangeStamp} onClick={handleModalType} />
       </StyledStampGrid>
     </StyledModalContainer>
   );
