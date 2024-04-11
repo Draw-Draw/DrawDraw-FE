@@ -13,7 +13,7 @@ export const PostTxt2Img = async ({
   const defaultNegativePrompt =
     'lowres, nsfw, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, (worst quality:1.3), (low quality:1.3), normal quality ,jpeg artifacts, signature, watermark, username, blurry';
   const defaultSeed = -1;
-  const defaultSteps = 20;
+  const defaultSteps = 30;
   const defaultWidth = 1016;
   const defaultHeight = 426;
 
@@ -26,15 +26,11 @@ export const PostTxt2Img = async ({
     height: defaultHeight,
   };
 
-  const response = await axios.post(
-    'http://127.0.0.1:7860/sdapi/v1/txt2img',
-    requestData,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+  const response = await axios.post('http://127.0.0.1:7860/sdapi/v1/txt2img', requestData, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
   console.log(response);
   return response.data.images[0];
