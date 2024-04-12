@@ -27,7 +27,9 @@ client.interceptors.response.use(
   },
   async (error) => {
     const originalRequest = error.config;
-    if (error.response.code === 401) {
+    console.log('에러남');
+    if (error.response.status === 401) {
+      console.log('에러남?');
       const refreshToken = localStorage.getItem('refreshToken');
       if (refreshToken) {
         try {

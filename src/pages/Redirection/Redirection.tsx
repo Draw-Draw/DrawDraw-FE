@@ -24,7 +24,9 @@ export const Redirection = () => {
             navigate('/');
             localStorage.setItem('accessToken', response.data.data.accessToken);
             localStorage.setItem('refreshToken', response.data.data.refreshToken);
+            localStorage.setItem('memberId', response.data.data.memberId);
           }
+          console.log(response);
         } catch (error) {
           console.error('Error fetching token:', error);
         }
