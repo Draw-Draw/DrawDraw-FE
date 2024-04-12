@@ -24,6 +24,8 @@ import { useSetModalType } from '../../hook/useSetModalType';
 import GoDiaryBookMark from '../../assets/bookmarks/GoDiaryBookMark.svg';
 import { getComment } from '../..//apis/getComment';
 import { ResponseCommentType } from '../../types/Comment.type';
+import { modalTypeState } from '../../recoil/modalType';
+import { useRecoilValue } from 'recoil';
 
 interface CommentProps {
   onSelectMode: () => void;
@@ -35,6 +37,7 @@ export const Comment = ({ onSelectMode, diarybookid, diaryid }: CommentProps) =>
   const [isOpenModal, setIsOpenModal] = useState(false);
   const setModalType = useSetModalType();
   const [isComments, setIsComments] = useState<ResponseCommentType[]>([]);
+  const modalType = useRecoilValue(modalTypeState);
 
   const stampImages: Record<string, string> = {
     BLUE: BLUE,
@@ -45,23 +48,29 @@ export const Comment = ({ onSelectMode, diarybookid, diaryid }: CommentProps) =>
     ORANGE: ORANGE,
   };
 
+  const fetchComment = async () => {
+    try {
+      const response = await getComment(diaryid);
+      setIsComments(response);
+      console.log(response);
+    } catch (error) {
+      console.error('Error fetching comments:', error);
+    }
+  };
+
   useEffect(() => {
     setModalType('STAMP');
-    const fetchComment = async () => {
-      try {
-        const response = await getComment(diaryid);
-        setIsComments(response);
-        console.log(response);
-      } catch (error) {
-        console.error('Error fetching comments:', error);
-      }
-    };
-
     fetchComment();
   }, []);
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    if (modalType === 'COMMENT') {
+      setIsOpenModal(false);
+    }
   };
 
   return (
@@ -83,7 +92,13 @@ export const Comment = ({ onSelectMode, diarybookid, diaryid }: CommentProps) =>
       <StyledBookMarkedContainer>
         <StyledBookMarked src={GoDiaryBookMark} onClick={onSelectMode} />
       </StyledBookMarkedContainer>
-      {isOpenModal && <CommonModal diaryId={diaryid} />}
+      {isOpenModal && (
+        <CommonModal
+          diaryId={diaryid}
+          onCloseModal={handleCloseModal}
+          fetchComment={fetchComment}
+        />
+      )}
     </>
   );
 };

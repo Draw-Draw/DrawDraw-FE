@@ -6,12 +6,15 @@ import { postComment } from '../../../../apis/postComment';
 import { CommentType } from '../../../../types/Comment.type';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getComment } from '@/apis/getComment';
 
 interface Props {
   diaryId?: string;
+  onCloseModal?: () => void;
+  fetchComment?: () => void;
 }
 
-export const CommentModal = ({ diaryId }: Props) => {
+export const CommentModal = ({ diaryId, onCloseModal, fetchComment }: Props) => {
   const [commentState, setCommentState] = useRecoilState(PostCommentState);
   const [content, setContent] = useState('');
 
@@ -23,6 +26,12 @@ export const CommentModal = ({ diaryId }: Props) => {
     try {
       const response = await postComment(diaryId, { ...commentState, content: content });
       console.log(response);
+      if (onCloseModal) {
+        onCloseModal();
+      }
+      if (fetchComment) {
+        fetchComment();
+      }
     } catch (error) {
       console.error('postDiaryBook 요청 중 오류 발생:', error);
     }
@@ -32,8 +41,12 @@ export const CommentModal = ({ diaryId }: Props) => {
     setContent(event.target.value);
   };
 
+  const handleContainerClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+  };
+
   return (
-    <StyledModalContainer>
+    <StyledModalContainer onClick={handleContainerClick}>
       <StyledInputComment
         rows={2}
         cols={30}

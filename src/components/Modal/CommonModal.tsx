@@ -14,9 +14,15 @@ interface CommonModalProps {
   onSelectWeather?: (weather: string) => void;
   onCloseModal?: () => void;
   diaryId?: string | undefined;
+  fetchComment?: () => void;
 }
 
-export const CommonModal = ({ onSelectWeather, onCloseModal, diaryId }: CommonModalProps) => {
+export const CommonModal = ({
+  onSelectWeather,
+  onCloseModal,
+  diaryId,
+  fetchComment,
+}: CommonModalProps) => {
   const MODAL_TYPES = {
     PUBLIC: 'PUBLIC',
     GODRAW: 'GODRAW',
@@ -42,7 +48,9 @@ export const CommonModal = ({ onSelectWeather, onCloseModal, diaryId }: CommonMo
       {modalType === MODAL_TYPES.WEATHER && <WeatherModal onSelectWeather={onSelectWeather} />}
       {modalType === MODAL_TYPES.SHARE && <ShareModal />}
       {modalType === MODAL_TYPES.STAMP && <StampModal diaryId={diaryId} />}
-      {modalType === MODAL_TYPES.COMMENT && <CommentModal diaryId={diaryId} />}
+      {modalType === MODAL_TYPES.COMMENT && (
+        <CommentModal diaryId={diaryId} onCloseModal={onCloseModal} fetchComment={fetchComment} />
+      )}
     </StyledBackground>
   );
 };
