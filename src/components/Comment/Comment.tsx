@@ -12,15 +12,18 @@ import {
   StyledStamp,
   StyledText,
 } from './Comment.style';
-import BlueStamp from '../../assets/Stamps/BlueStamp.svg';
-import PurpleStamp from '../../assets/Stamps/PurpleStamp.svg';
-import RedStamp from '../../assets/Stamps/RedStamp.svg';
-import GreenStamp from '../../assets/Stamps/GreenStamp.svg';
+import BLUE from '../../assets/Stamps/BlueStamp.svg';
+import PURPLE from '../../assets/Stamps/PurpleStamp.svg';
+import RED from '../../assets/Stamps/RedStamp.svg';
+import GREEN from '../../assets/Stamps/GreenStamp.svg';
+import YELLOW from '../../assets/Stamps/YellowStamp.svg';
+import ORANGE from '../../assets/Stamps/OrangeStamp.svg';
 import PlusBtn from '../../assets/buttons/PlusBtn.svg';
 import { CommonModal } from '../Modal/CommonModal';
 import { useSetModalType } from '../../hook/useSetModalType';
 import GoDiaryBookMark from '../../assets/bookmarks/GoDiaryBookMark.svg';
 import { getComment } from '../..//apis/getComment';
+import { ResponseCommentType } from '../../types/Comment.type';
 
 interface CommentProps {
   onSelectMode: () => void;
@@ -31,12 +34,30 @@ interface CommentProps {
 export const Comment = ({ onSelectMode, diarybookid, diaryid }: CommentProps) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const setModalType = useSetModalType();
+  const [isComments, setIsComments] = useState<ResponseCommentType[]>([]);
+
+  const stampImages: Record<string, string> = {
+    BLUE: BLUE,
+    YELLOW: YELLOW,
+    GREEN: GREEN,
+    RED: RED,
+    PURPLE: PURPLE,
+    ORANGE: ORANGE,
+  };
 
   useEffect(() => {
-    setIsOpenModal(false);
     setModalType('STAMP');
-    const response = getComment(diaryid);
-    console.log(response);
+    const fetchComment = async () => {
+      try {
+        const response = await getComment(diaryid);
+        setIsComments(response);
+        console.log(response);
+      } catch (error) {
+        console.error('Error fetching comments:', error);
+      }
+    };
+
+    fetchComment();
   }, []);
 
   const handleOpenModal = () => {
@@ -47,48 +68,22 @@ export const Comment = ({ onSelectMode, diarybookid, diaryid }: CommentProps) =>
     <>
       <StyledCommentBook src={CommentSketchBook} />
       <StyledCommentContainer>
-        <StyledComment>
-          <StyledStamp src={BlueStamp} />
-          <StyledCommentText>
-            <StyledNickname>닉네임</StyledNickname>
-            <StyledText>
-              일기너무재밌다 나도 다음에 같이 놀자 어쩌구 저쩌구 우하하하하하하핳 심심하다
-            </StyledText>
-          </StyledCommentText>
-        </StyledComment>
-        <StyledComment>
-          <StyledStamp src={PurpleStamp} />
-          <StyledCommentText>
-            <StyledNickname>닉네임</StyledNickname>
-            <StyledText>
-              일기너무재밌다 나도 다음에 같이 놀자 어쩌구 저쩌구 우하하하하하하핳 심심하다
-            </StyledText>
-          </StyledCommentText>
-        </StyledComment>
-        <StyledComment>
-          <StyledStamp src={RedStamp} />
-          <StyledCommentText>
-            <StyledNickname>닉네임</StyledNickname>
-            <StyledText>
-              일기너무재밌다 나도 다음에 같이 놀자 어쩌구 저쩌구 우하하하하하하핳 심심하다
-            </StyledText>
-          </StyledCommentText>
-        </StyledComment>
-        <StyledComment>
-          <StyledStamp src={GreenStamp} />
-          <StyledCommentText>
-            <StyledNickname>닉네임</StyledNickname>
-            <StyledText>
-              일기너무재밌다 나도 다음에 같이 놀자 어쩌구 저쩌구 우하하하하하하핳 심심하다
-            </StyledText>
-          </StyledCommentText>
-        </StyledComment>
+        {isComments &&
+          isComments.map((item, index) => (
+            <StyledComment key={index}>
+              <StyledStamp src={stampImages[item.stampType]} />
+              <StyledCommentText>
+                <StyledNickname>{item.name}</StyledNickname>
+                <StyledText>{item.content}</StyledText>
+              </StyledCommentText>
+            </StyledComment>
+          ))}
         <StyledPlusBtn src={PlusBtn} onClick={handleOpenModal} />
       </StyledCommentContainer>
       <StyledBookMarkedContainer>
         <StyledBookMarked src={GoDiaryBookMark} onClick={onSelectMode} />
       </StyledBookMarkedContainer>
-      {isOpenModal && <CommonModal />}
+      {isOpenModal && <CommonModal diaryId={diaryid} />}
     </>
   );
 };

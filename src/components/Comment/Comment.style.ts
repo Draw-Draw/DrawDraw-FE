@@ -40,7 +40,7 @@ export const StyledCommentText = styled.div`
 export const StyledStamp = styled.img`
   width: 15%;
   @media (min-width: 1601px) and (max-width: 1920px) {
-    width: 16%;
+    width: 15%;
   }
 `;
 
@@ -69,9 +69,14 @@ export const StyledText = styled.div`
 `;
 
 export const StyledPlusBtn = styled.img`
+  position: fixed;
   width: 110px;
   z-index: 3;
   cursor: pointer;
+  margin-top: 36%;
+  @media (min-width: 1601px) and (max-width: 1920px) {
+    margin-top: 35%;
+  }
 `;
 
 export const StyledBookMarkedContainer = styled.div`

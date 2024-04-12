@@ -8,6 +8,6 @@ export const getComment = async (diaryId: string | undefined) => {
     },
   });
 
-  console.log(response.data.data);
-  return response.data.data;
+  console.log(response.data.data.commentViewResponses);
+  return response.data.data.commentViewResponses;
 };

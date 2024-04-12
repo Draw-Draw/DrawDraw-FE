@@ -13,9 +13,10 @@ import { CommentModal } from './ModalType/CommentModal/CommentModal';
 interface CommonModalProps {
   onSelectWeather?: (weather: string) => void;
   onCloseModal?: () => void;
+  diaryId?: string | undefined;
 }
 
-export const CommonModal = ({ onSelectWeather, onCloseModal }: CommonModalProps) => {
+export const CommonModal = ({ onSelectWeather, onCloseModal, diaryId }: CommonModalProps) => {
   const MODAL_TYPES = {
     PUBLIC: 'PUBLIC',
     GODRAW: 'GODRAW',
@@ -40,8 +41,8 @@ export const CommonModal = ({ onSelectWeather, onCloseModal }: CommonModalProps)
       {modalType === MODAL_TYPES.GODRAW && <GoDrawModal />}
       {modalType === MODAL_TYPES.WEATHER && <WeatherModal onSelectWeather={onSelectWeather} />}
       {modalType === MODAL_TYPES.SHARE && <ShareModal />}
-      {modalType === MODAL_TYPES.STAMP && <StampModal />}
-      {modalType === MODAL_TYPES.COMMENT && <CommentModal />}
+      {modalType === MODAL_TYPES.STAMP && <StampModal diaryId={diaryId} />}
+      {modalType === MODAL_TYPES.COMMENT && <CommentModal diaryId={diaryId} />}
     </StyledBackground>
   );
 };
