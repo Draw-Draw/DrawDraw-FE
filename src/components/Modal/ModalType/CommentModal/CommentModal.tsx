@@ -5,8 +5,6 @@ import { PostCommentState } from '../../../../recoil/PostCommentState';
 import { postComment } from '../../../../apis/postComment';
 import { CommentType } from '../../../../types/Comment.type';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getComment } from '@/apis/getComment';
 
 interface Props {
   diaryId?: string;
