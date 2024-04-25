@@ -55,7 +55,7 @@ export const StyledInputColor = styled.input`
 export const StyledRange = styled.input`
   position: absolute;
   transform: rotate(-90deg);
-  right: -110px;
+  right: -140px;
   top: 150px;
   accent-color: #4f1d03;
   background: #d7ccae;
@@ -106,4 +106,34 @@ export const StyledRange = styled.input`
     border-radius: 12px;
     border: none;
   }
+`;
+
+export const StyledRangeContainer = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+`;
+
+export const StyledCircleContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 90px;
+  position: relative;
+  right: -120px;
+  top: 90px;
+`;
+
+export const StyledBigCircle = styled.div`
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #4f1d03;
+`;
+
+export const StyledSmallCircle = styled.div`
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #4f1d03;
 `;

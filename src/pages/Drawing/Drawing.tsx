@@ -65,6 +65,18 @@ export const Drawing = () => {
     }
   };
 
+  const handleUndo = () => {
+    if (canvasRef.current && canvasRef.current.handleUndo) {
+      canvasRef.current.handleUndo();
+    }
+  };
+
+  const handleRedo = () => {
+    if (canvasRef.current && canvasRef.current.handleRedo) {
+      canvasRef.current.handleRedo();
+    }
+  };
+
   useEffect(() => {
     setModalOpen(false);
     setModalType('WEATHER');
@@ -101,25 +113,6 @@ export const Drawing = () => {
     }
     return new Blob([u8arr], { type: 'image/png' });
   };
-
-  // const dataURLtoFile = (dataurl: string, fileName: string) => {
-  //   var arr = dataurl.split(',');
-  //   if (arr.length < 2) {
-  //     throw new Error('Invalid data URL');
-  //   }
-  //   var mimeMatch = arr[0].match(/:(.*?);/);
-  //   if (!mimeMatch || mimeMatch.length < 2) {
-  //     throw new Error('Invalid data URL');
-  //   }
-  //   var mime = mimeMatch[1];
-  //   var bstr = atob(arr[1]);
-  //   var n = bstr.length;
-  //   var u8arr = new Uint8Array(n);
-  //   while (n--) {
-  //     u8arr[n] = bstr.charCodeAt(n);
-  //   }
-  //   return new File([u8arr], fileName, { type: 'image/png' });
-  // };
 
   const handlePostImg2Img = async () => {
     try {
@@ -264,7 +257,13 @@ export const Drawing = () => {
               value={diaryContent}
               onChange={(e) => setDiaryContent(e.target.value)}
             />
-            <ToolBar onSelectMode={handlePenMode} isPen={isPen} onClearCanvas={handleClearCanvas} />
+            <ToolBar
+              onUndo={handleUndo}
+              onRedo={handleRedo}
+              onSelectMode={handlePenMode}
+              isPen={isPen}
+              onClearCanvas={handleClearCanvas}
+            />
           </StyledDrawingContainer>
           {modalOpen && <CommonModal onSelectWeather={handleSelectWeather} />}
           <StyledSelectBtn src={CompleteBtn} onClick={handlePostImg2Img} />

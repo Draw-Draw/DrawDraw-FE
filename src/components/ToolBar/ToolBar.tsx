@@ -9,12 +9,16 @@ import Background from '../../assets/Tools/BigBackground.svg';
 import SmallBackground from '../../assets/Tools/SmallBackground.svg';
 import {
   StyledBackground,
+  StyledBigCircle,
+  StyledCircleContainer,
   StyledContainer,
   StyledIcon,
   StyledIconContainer,
   StyledInputColor,
   StyledRange,
+  StyledRangeContainer,
   StyledSmallBackground,
+  StyledSmallCircle,
 } from './ToolBar.style';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
@@ -23,10 +27,12 @@ import { LineState, LineStateProps } from '../../recoil/LineState';
 interface ToolBarProps {
   onSelectMode: () => void;
   onClearCanvas: () => void;
+  onUndo: () => void;
+  onRedo: () => void;
   isPen: boolean;
 }
 
-export const ToolBar = ({ onSelectMode, onClearCanvas, isPen }: ToolBarProps) => {
+export const ToolBar = ({ onSelectMode, onClearCanvas, onUndo, onRedo, isPen }: ToolBarProps) => {
   const [line, setLine] = useRecoilState(LineState);
   const [isOpenWidth, setIsOpenWidth] = useState(true);
   const maxValue = 20;
@@ -56,9 +62,9 @@ export const ToolBar = ({ onSelectMode, onClearCanvas, isPen }: ToolBarProps) =>
       <StyledBackground src={Background} />
       <StyledIconContainer>
         {isPen ? (
-          <StyledIcon src={Eraser} onClick={onSelectMode} />
-        ) : (
           <StyledIcon src={Pen} onClick={onSelectMode} />
+        ) : (
+          <StyledIcon src={Eraser} onClick={onSelectMode} />
         )}
         {line.color !== '#672909' ? (
           <StyledInputColor type="color" value={line.color} onChange={handleChangeColor} />
@@ -85,16 +91,22 @@ export const ToolBar = ({ onSelectMode, onClearCanvas, isPen }: ToolBarProps) =>
         )}
         <StyledIcon src={SelectWidth} onClick={handleOpenSelectWidth} />
         {isOpenWidth && (
-          <StyledRange
-            type="range"
-            min="1"
-            max={maxValue.toString()}
-            defaultValue={line.width.toString()}
-            onChange={handleChangeWidth}
-          />
+          <StyledRangeContainer>
+            <StyledRange
+              type="range"
+              min="1"
+              max={maxValue.toString()}
+              defaultValue={line.width.toString()}
+              onChange={handleChangeWidth}
+            />
+            <StyledCircleContainer>
+              <StyledBigCircle />
+              <StyledSmallCircle />
+            </StyledCircleContainer>
+          </StyledRangeContainer>
         )}
-        <StyledIcon src={Undo} />
-        <StyledIcon src={Redo} />
+        <StyledIcon src={Undo} onClick={onUndo} />
+        <StyledIcon src={Redo} onClick={onRedo} />
         <StyledIcon src={Reset} onClick={onClearCanvas} />
       </StyledIconContainer>
     </StyledContainer>
