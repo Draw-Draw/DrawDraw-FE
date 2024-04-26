@@ -1,6 +1,6 @@
 import { client } from './client';
 
-export const getNickname = async (name: string) => {
+export const postNickname = async (name: string) => {
   const accessToken = localStorage.getItem('accessToken');
   try {
     const response = await client.post(
