@@ -9,6 +9,9 @@ export const postLogout = async () => {
       },
     });
     console.log(response.data);
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+
     return response.data;
   } catch (error) {
     console.error('API 요청 중 오류 발생:', error);
