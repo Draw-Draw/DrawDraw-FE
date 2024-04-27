@@ -36,10 +36,7 @@ export const StyledEmptySketchBook = styled.img`
 
 export const StyledTodayDiaryGrid = styled.div`
   position: absolute;
-  padding-top: 30px;
-  height: 480px;
-  overflow-y: scroll;
-  margin-top: 90px;
+  margin-top: 80px;
   display: grid;
   grid-template-columns: repeat(3, 300px);
   grid-template-rows: repeat(2, 240px);
@@ -47,8 +44,7 @@ export const StyledTodayDiaryGrid = styled.div`
   justify-items: center;
 
   @media (min-width: 1601px) and (max-width: 1920px) {
-    margin-top: 70px;
-    height: 500px;
+    padding-top: 160px;
     grid-template-columns: repeat(3, 330px);
     grid-template-rows: repeat(2, 270px);
   }
@@ -66,14 +62,14 @@ export const StyledSketchBookTitle = styled.div`
   z-index: 9999;
   top: -158px;
   @media (min-width: 1601px) and (max-width: 1920px) {
-    grid-template-columns: repeat(3, 330px);
-    grid-template-rows: repeat(2, 270px);
     top: -174px;
   }
 `;
 
 export const StyledUserDiary = styled.div`
   position: relative;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const StyledSketchBookSchool = styled.div`
@@ -89,8 +85,6 @@ export const StyledSketchBookSchool = styled.div`
   top: -104px;
   right: -30px;
   @media (min-width: 1601px) and (max-width: 1920px) {
-    grid-template-columns: repeat(3, 330px);
-    grid-template-rows: repeat(2, 270px);
     top: -108px;
   }
 `;
@@ -108,8 +102,28 @@ export const StyledSketchBookName = styled.div`
   top: -144px;
   right: -85px;
   @media (min-width: 1601px) and (max-width: 1920px) {
-    grid-template-columns: repeat(3, 330px);
-    grid-template-rows: repeat(2, 270px);
-    top: -108px;
+    top: -148px;
+    right: -95px;
   }
+`;
+
+interface ArrowProps {
+  isDisabled: boolean;
+}
+
+export const StyledLeftArrow = styled.img<ArrowProps>`
+  position: absolute;
+  left: 200px;
+  width: 89px;
+  display: ${(props) => (props.isDisabled ? 'none' : '')};
+  cursor: pointer;
+`;
+
+export const StyledRightArrow = styled.img<ArrowProps>`
+  position: absolute;
+  right: 200px;
+  width: 89px;
+  transform: scale(-1, 1);
+  display: ${(props) => (props.isDisabled ? 'none' : '')};
+  cursor: pointer;
 `;
