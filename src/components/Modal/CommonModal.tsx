@@ -9,12 +9,16 @@ import { WeatherModal } from './ModalType/WeatherModal/WeatherModal';
 import { ShareModal } from './ModalType/ShareModal/ShareModal';
 import { StampModal } from './ModalType/StampModal/StampModal';
 import { CommentModal } from './ModalType/CommentModal/CommentModal';
+import { SelectDiaryModal } from './ModalType/SelectDiary/SelectDiary';
+import { WriteOrView } from './ModalType/WriteOrView/WriteOrView';
 
 interface CommonModalProps {
   onSelectWeather?: (weather: string) => void;
   onCloseModal?: () => void;
   diaryId?: string | undefined;
   fetchComment?: () => void;
+  diaryName?: string;
+  diarybookId?: number;
 }
 
 export const CommonModal = ({
@@ -22,6 +26,8 @@ export const CommonModal = ({
   onCloseModal,
   diaryId,
   fetchComment,
+  diaryName,
+  diarybookId,
 }: CommonModalProps) => {
   const MODAL_TYPES = {
     PUBLIC: 'PUBLIC',
@@ -30,6 +36,8 @@ export const CommonModal = ({
     SHARE: 'SHARE',
     STAMP: 'STAMP',
     COMMENT: 'COMMENT',
+    SELECTDIARY: 'SELECTDIARY',
+    WRITEORVIEW: 'WRITEORVIEW',
   };
 
   const modalType = useRecoilValue(modalTypeState);
@@ -50,6 +58,10 @@ export const CommonModal = ({
       {modalType === MODAL_TYPES.STAMP && <StampModal diaryId={diaryId} />}
       {modalType === MODAL_TYPES.COMMENT && (
         <CommentModal diaryId={diaryId} onCloseModal={onCloseModal} fetchComment={fetchComment} />
+      )}
+      {modalType === MODAL_TYPES.SELECTDIARY && <SelectDiaryModal onCloseModal={onCloseModal} />}
+      {modalType === MODAL_TYPES.WRITEORVIEW && (
+        <WriteOrView diaryName={diaryName} diarybookId={diarybookId} />
       )}
     </StyledBackground>
   );
