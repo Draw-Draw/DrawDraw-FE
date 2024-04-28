@@ -22,6 +22,7 @@ interface HeaderProps {
 
 export const Header = ({ isDrawing, isTotal }: HeaderProps) => {
   const [isHamburgerClicked, setIsHamburgerClicked] = useState(false);
+  const id = localStorage.getItem('memberId');
   const navigate = useNavigate();
 
   const handleGoHome = () => {
@@ -29,7 +30,7 @@ export const Header = ({ isDrawing, isTotal }: HeaderProps) => {
   };
 
   const handleGoDrawing = () => {
-    navigate('/drawing/:diarybookid');
+    navigate(`/my/select/${id}`);
   };
 
   const handleGoNewDiary = () => {
@@ -41,7 +42,7 @@ export const Header = ({ isDrawing, isTotal }: HeaderProps) => {
   };
 
   const handleGoMy = () => {
-    navigate('/my/1');
+    navigate(`/my/${id}`);
   };
 
   const handleLogout = () => {
