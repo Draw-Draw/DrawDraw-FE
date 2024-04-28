@@ -25,6 +25,8 @@ import PURPLE from '../../assets/Cover/PURPLE.svg';
 import Arrow from '../../assets/Arrow.png';
 import { DiaryBookType } from '../../types/DiaryBook.type';
 import { useParams } from 'react-router-dom';
+import { useSetModalType } from '../../hook/useSetModalType';
+import { CommonModal } from '../../components/Modal/CommonModal';
 
 interface BoardItemType {
   coverType: string;
@@ -39,6 +41,10 @@ export const UserDiaryBoard = () => {
   const [boardData, setBoardData] = useState<BoardItemType[]>([]);
   type CoverType = DiaryBookType['coverType'];
   const [pageNumber, setPageNumber] = useState(0);
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedDiaryName, setSelectedDiaryName] = useState('');
+  const [selectedDiaryBookId, setSelectedDiaryBookId] = useState(0);
+  const setModalType = useSetModalType();
   const itemsPerPage = 6;
 
   const getPageItems = () => {
@@ -75,6 +81,13 @@ export const UserDiaryBoard = () => {
     setPageNumber(pageNumber - 1);
   };
 
+  const handleSelectModal = (diaryName: string, diaryBookId: number) => {
+    setOpenModal(true);
+    setModalType('WRITEORVIEW');
+    setSelectedDiaryName(diaryName);
+    setSelectedDiaryBookId(diaryBookId);
+  };
+
   return (
     <StyledContainer>
       <Header isDrawing={false} />
@@ -82,7 +95,7 @@ export const UserDiaryBoard = () => {
         <StyledGreenBoard src={GreenBoard} />
         <StyledTodayDiaryGrid>
           {getPageItems().map((item) => (
-            <StyledUserDiary>
+            <StyledUserDiary onClick={() => handleSelectModal(item.diaryName, item.diaryBookId)}>
               <StyledEmptySketchBook src={coverImages[item.coverType]} key={item.diaryBookId} />
               <StyledSketchBookTitle>{item.diaryName}</StyledSketchBookTitle>
               <StyledSketchBookSchool>{item.group}</StyledSketchBookSchool>
@@ -97,6 +110,7 @@ export const UserDiaryBoard = () => {
           isDisabled={pageNumber === Math.ceil(boardData.length / itemsPerPage) - 1}
         />
       </StyledBoardContainer>
+      {openModal && <CommonModal diaryName={selectedDiaryName} diarybookId={selectedDiaryBookId} />}
     </StyledContainer>
   );
 };

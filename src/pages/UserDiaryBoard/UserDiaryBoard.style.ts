@@ -70,6 +70,7 @@ export const StyledUserDiary = styled.div`
   position: relative;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const StyledSketchBookSchool = styled.div`
