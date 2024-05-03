@@ -14,7 +14,7 @@ import { useEffect } from 'react';
 
 export const Landing = () => {
   const REST_API_KEY = process.env.REACT_APP_REST_API_KEY;
-  const Kakao_Redirect_Uri = 'http://localhost:3000/auth';
+  const Kakao_Redirect_Uri = process.env.REACT_APP_REDIRECT_URI;
 
   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${Kakao_Redirect_Uri}&response_type=code&prompt=login`;
 
