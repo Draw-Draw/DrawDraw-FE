@@ -65,7 +65,7 @@ export const SelectUserDiaryBoard = () => {
   useEffect(() => {
     setModalOpen(true);
     setModalType('SELECTDIARY');
-    const fetchUserData = async () => {
+    const fetchUserData = async (id: string | undefined) => {
       try {
         const userData = await getMemberBoard(id);
         setBoardData(userData);
@@ -74,7 +74,7 @@ export const SelectUserDiaryBoard = () => {
         console.error('Error fetching board data:', error);
       }
     };
-    fetchUserData();
+    fetchUserData(id);
   }, [location]);
 
   const nextPage = () => {

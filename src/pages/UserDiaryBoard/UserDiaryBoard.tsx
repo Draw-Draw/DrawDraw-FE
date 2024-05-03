@@ -62,7 +62,7 @@ export const UserDiaryBoard = () => {
   };
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchUserData = async (id: string | undefined) => {
       try {
         const userData = await getMemberBoard(id);
         setBoardData(userData);
@@ -70,7 +70,7 @@ export const UserDiaryBoard = () => {
         console.error('Error fetching board data:', error);
       }
     };
-    fetchUserData();
+    fetchUserData(id);
   }, []);
 
   const nextPage = () => {
