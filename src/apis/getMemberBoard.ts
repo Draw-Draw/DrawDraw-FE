@@ -1,8 +1,7 @@
 import { client } from './client';
 
-export const getMemberBoard = async () => {
+export const getMemberBoard = async (memberId: string | undefined) => {
   const accessToken = localStorage.getItem('accessToken');
-  const memberId = localStorage.getItem('memberId');
   const response = await client.get(`/api/v1/members/${memberId}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
