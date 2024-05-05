@@ -180,7 +180,7 @@ export const StyledDiaryWeatherSelectText = styled.div`
 
 export const StyledInputDiary = styled.div`
   position: absolute;
-  z-index: 10000;
+  z-index: 9999;
   color: #672909;
   font-family: SSMullaeler;
   font-size: 31px;

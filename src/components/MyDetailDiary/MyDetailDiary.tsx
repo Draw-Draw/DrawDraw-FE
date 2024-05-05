@@ -31,7 +31,7 @@ import Snow from '../../assets/weathers/Snow.png';
 
 interface MineDetailDiaryProps {
   isData: ResultDiaryType;
-  onSelectMode: () => void;
+  onSelectMode?: () => void;
 }
 
 export const MyDetailDiary = ({ isData, onSelectMode }: MineDetailDiaryProps) => {
