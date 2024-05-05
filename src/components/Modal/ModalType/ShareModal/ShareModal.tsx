@@ -8,6 +8,8 @@ import {
 } from './ShareModal.style';
 import LinkCopyBtn from '../../../../assets/buttons/LinkCopyBtn.svg';
 import SaveBtn from '../../../../assets/buttons/SaveBtn.svg';
+import Logo from '../../../../assets/Logo.png';
+import QR from 'qrcode.react';
 
 export const ShareModal = () => {
   const location = useLocation();
@@ -24,7 +26,17 @@ export const ShareModal = () => {
   return (
     <StyledModalContainer onClick={(e) => e.stopPropagation()}>
       <StyledTitleText>카메라로 QR코드를 인식하세요!</StyledTitleText>
-      <StyledQRCode />
+      <QR
+        value={'https://draw-draw-fe.vercel.app/:diarybookid/:diaryid/share'}
+        size={200}
+        imageSettings={{ src: Logo, width: 100, height: 50, excavate: false }}
+        id="qr-gen"
+        level={'H'}
+        includeMargin={true}
+        bgColor={'white'}
+        fgColor={'black'}
+      />
+      {/* <StyledQRCode /> */}
       <StyledBtnContainer>
         <StyledBtn
           src={LinkCopyBtn}
