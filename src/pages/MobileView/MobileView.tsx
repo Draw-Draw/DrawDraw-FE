@@ -1,3 +1,5 @@
+import { StyledContainer } from './MobileView.style';
+
 export const MobileView = () => {
-  return <div>모바일 뷰 화면</div>;
+  return <StyledContainer>모바일 뷰 화면</StyledContainer>;
 };
