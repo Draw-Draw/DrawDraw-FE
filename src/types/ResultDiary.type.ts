@@ -1,4 +1,5 @@
 export interface ResultDiaryType {
+  diaryId?: string;
   content?: string;
   date?: string;
   imageUrl?: string;
