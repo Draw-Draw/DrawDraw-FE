@@ -5,7 +5,7 @@ export const StyledBackground = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.39);
-  z-index: 9999;
+  z-index: 10000;
   top: 0;
   left: 0;
   display: flex;
@@ -16,7 +16,7 @@ export const StyledBackground = styled.div`
 
 export const StyledCardClip = styled.img`
   width: 817px;
-  z-index: 9000;
+  z-index: 10000;
 
   @media (max-width: 1600px) {
     /* width: 700px; */

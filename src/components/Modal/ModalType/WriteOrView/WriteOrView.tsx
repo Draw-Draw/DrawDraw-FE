@@ -14,7 +14,7 @@ export const WriteOrView = ({
   diarybookId,
 }: {
   diaryName: string | undefined;
-  diarybookId: number | undefined;
+  diarybookId: string | undefined;
 }) => {
   const navigate = useNavigate();
 

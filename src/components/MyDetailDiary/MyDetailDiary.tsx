@@ -55,7 +55,6 @@ export const MyDetailDiary = ({ diarybookId, isData, onSelectMode }: MineDetailD
   console.log(`년: ${year}, 월: ${month}, 일: ${day}`);
 
   useEffect(() => {
-    console.log(diarybookId);
     setIsOpenShareModal(false);
     setModalType('SHARE');
   }, []);

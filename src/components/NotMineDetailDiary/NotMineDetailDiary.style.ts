@@ -52,7 +52,7 @@ interface TextProps {
 
 export const StyledDiaryText = styled.div<TextProps>`
   position: absolute;
-  z-index: 10000;
+  z-index: 9999;
   color: #672909;
   font-family: SSMullaeler;
   font-size: 34px;
@@ -75,7 +75,7 @@ export const StyledDiaryText = styled.div<TextProps>`
 
 export const StyledDiaryDayText = styled.div`
   position: absolute;
-  z-index: 10000;
+  z-index: 9999;
   color: #672909;
   font-family: SSMullaeler;
   font-size: 34px;
@@ -88,7 +88,7 @@ export const StyledDiaryDayText = styled.div`
 
 export const StyledDiaryWeatherText = styled.div`
   position: absolute;
-  z-index: 10000;
+  z-index: 9999;
   color: #672909;
   font-family: SSMullaeler;
   font-size: 34px;
@@ -100,7 +100,7 @@ export const StyledDiaryWeatherText = styled.div`
 `;
 
 export const StyledDaySelectContainer = styled.div`
-  z-index: 10000;
+  z-index: 9999.1;
   position: absolute;
   display: flex;
   flex-direction: row;
@@ -122,7 +122,7 @@ interface IconProps {
 }
 
 export const StyledIcon = styled.img<IconProps>`
-  z-index: 3;
+  z-index: 10000;
   width: ${(props) =>
     props.type === 'SUNNY'
       ? '98px'
@@ -168,7 +168,7 @@ export const StyledIcon = styled.img<IconProps>`
 export const StyledDiaryWeatherSelectText = styled.div`
   position: absolute;
   width: 180px;
-  z-index: 10000;
+  z-index: 9999;
   color: #672909;
   font-family: SSMullaeler;
   font-size: 34px;
@@ -180,7 +180,7 @@ export const StyledDiaryWeatherSelectText = styled.div`
 
 export const StyledInputDiary = styled.div`
   position: absolute;
-  z-index: 10000;
+  z-index: 9999;
   color: #672909;
   font-family: SSMullaeler;
   font-size: 31px;

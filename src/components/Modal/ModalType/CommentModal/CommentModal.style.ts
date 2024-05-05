@@ -6,7 +6,7 @@ export const StyledModalContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 9px;
-  z-index: 9999;
+  z-index: 10000;
   margin-top: 20px;
 `;
 

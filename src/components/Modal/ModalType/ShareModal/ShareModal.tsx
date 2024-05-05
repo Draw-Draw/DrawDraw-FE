@@ -27,9 +27,6 @@ export const ShareModal = ({
     }
   };
 
-  console.log(diaryId);
-  console.log(diarybookId);
-
   return (
     <StyledModalContainer onClick={(e) => e.stopPropagation()}>
       <StyledTitleText>카메라로 QR코드를 인식하세요!</StyledTitleText>

@@ -6,12 +6,12 @@ export const StyledModalTextContainer = styled.div`
   flex-direction: column;
   gap: 27px;
   align-items: center;
-  z-index: 9999;
+  z-index: 10000;
 `;
 
 export const StyledTitleText = styled.div`
   font-family: SSMullaeler;
-  z-index: 9999;
+  z-index: 10000;
   color: #511f05;
   font-size: 45px;
   font-style: normal;
