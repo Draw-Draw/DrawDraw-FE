@@ -1,5 +1,5 @@
 // import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
   StyledContainer,
@@ -15,6 +15,8 @@ import { MyDetailDiary } from '../../components/MyDetailDiary/MyDetailDiary';
 import { NotMineDetailDiary } from '../../components/NotMineDetailDiary/NotMineDetailDiary';
 import { Comment } from '../../components/Comment/Comment';
 import { useParams } from 'react-router-dom';
+import { getTotalDiary } from '../../apis/getTotalDiary';
+import { ResultDiaryType } from '@/types/ResultDiary.type';
 
 const Btn = styled.button`
   z-index: 9999;
@@ -25,10 +27,31 @@ export const TotalDiary = () => {
     diarybookid: string | undefined;
     diaryid: string | undefined;
   }>();
-  const [isValue, setIsValue] = useState<number>(3);
+  const [isValue, setIsValue] = useState<number>(1);
   const [isMy] = useState(true);
   const [isComment, setIsComment] = useState(false);
-  const maxValue = 10;
+  const [isDiaryArr, setIsDiaryArr] = useState([]);
+  const [isDiaryData, setIsDiaryData] = useState<ResultDiaryType>({});
+
+  useEffect(() => {
+    const fetchDiaryData = async () => {
+      try {
+        const diaryData = await getTotalDiary(diarybookid);
+        setIsDiaryArr(diaryData);
+        console.log(diaryData);
+      } catch (error) {
+        console.error('Error fetching board data:', error);
+      }
+    };
+    fetchDiaryData();
+  }, [diarybookid]);
+
+  useEffect(() => {
+    if (isDiaryArr.length > 0) {
+      const data = isDiaryArr[isValue - 1];
+      setIsDiaryData(data);
+    }
+  }, [isValue, isDiaryArr]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(event.target.value, 10);
@@ -44,24 +67,36 @@ export const TotalDiary = () => {
     <StyledContainer>
       <Header isDrawing={false} isTotal />
       <StyledDiaryContainer>
-        {!isComment ? (
+        {isDiaryArr.length > 0 && (
           <>
-            {/* {isMy ? <MyDetailDiary /> : <NotMineDetailDiary onSelectMode={handleChangeMode} />} */}
-            <StyledRangeContainer>
-              <StyledPageSlide
-                type="range"
-                min="1"
-                max={maxValue.toString()}
-                defaultValue={isValue.toString()}
-                onChange={handleChange}
+            {!isComment ? (
+              <>
+                {isMy && isDiaryData ? (
+                  <MyDetailDiary isData={isDiaryData} onSelectMode={handleChangeMode} />
+                ) : (
+                  <NotMineDetailDiary isData={isDiaryData} onSelectMode={handleChangeMode} />
+                )}
+                <StyledRangeContainer>
+                  <StyledPageSlide
+                    type="range"
+                    min="1"
+                    max={isDiaryArr.length}
+                    defaultValue={isValue.toString()}
+                    onChange={handleChange}
+                  />
+                  <StyledRangeText>
+                    {isValue}/{isDiaryArr.length}
+                  </StyledRangeText>
+                </StyledRangeContainer>
+              </>
+            ) : (
+              <Comment
+                onSelectMode={handleChangeMode}
+                diarybookid={diarybookid}
+                diaryid={isDiaryData.diaryId}
               />
-              <StyledRangeText>
-                {isValue}/{maxValue}
-              </StyledRangeText>
-            </StyledRangeContainer>
+            )}
           </>
-        ) : (
-          <Comment onSelectMode={handleChangeMode} diarybookid={diarybookid} diaryid={diaryid} />
         )}
       </StyledDiaryContainer>
     </StyledContainer>
