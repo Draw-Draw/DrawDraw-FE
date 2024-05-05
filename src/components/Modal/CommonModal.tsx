@@ -18,7 +18,7 @@ interface CommonModalProps {
   diaryId?: string | undefined;
   fetchComment?: () => void;
   diaryName?: string;
-  diarybookId?: number;
+  diarybookId?: string | undefined;
 }
 
 export const CommonModal = ({
@@ -54,7 +54,9 @@ export const CommonModal = ({
       {modalType === MODAL_TYPES.PUBLIC && <PublicModal />}
       {modalType === MODAL_TYPES.GODRAW && <GoDrawModal />}
       {modalType === MODAL_TYPES.WEATHER && <WeatherModal onSelectWeather={onSelectWeather} />}
-      {modalType === MODAL_TYPES.SHARE && <ShareModal />}
+      {modalType === MODAL_TYPES.SHARE && (
+        <ShareModal diarybookId={diarybookId} diaryId={diaryId} />
+      )}
       {modalType === MODAL_TYPES.STAMP && <StampModal diaryId={diaryId} />}
       {modalType === MODAL_TYPES.COMMENT && (
         <CommentModal diaryId={diaryId} onCloseModal={onCloseModal} fetchComment={fetchComment} />

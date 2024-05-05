@@ -30,11 +30,12 @@ import Rainy from '../../assets/weathers/Rainy.png';
 import Snow from '../../assets/weathers/Snow.png';
 
 interface MineDetailDiaryProps {
+  diarybookId: string | undefined;
   isData: ResultDiaryType;
   onSelectMode?: () => void;
 }
 
-export const MyDetailDiary = ({ isData, onSelectMode }: MineDetailDiaryProps) => {
+export const MyDetailDiary = ({ diarybookId, isData, onSelectMode }: MineDetailDiaryProps) => {
   const [isOpenShareModal, setIsOpenShareModal] = useState(false);
   const setModalType = useSetModalType();
 
@@ -54,6 +55,7 @@ export const MyDetailDiary = ({ isData, onSelectMode }: MineDetailDiaryProps) =>
   console.log(`년: ${year}, 월: ${month}, 일: ${day}`);
 
   useEffect(() => {
+    console.log(diarybookId);
     setIsOpenShareModal(false);
     setModalType('SHARE');
   }, []);
@@ -117,7 +119,13 @@ export const MyDetailDiary = ({ isData, onSelectMode }: MineDetailDiaryProps) =>
           <StyledBookMarked src={CommentBookMark} onClick={onSelectMode} />
         </StyledBookMarkedContainer>
       </StyledDrawingContainer>
-      {isOpenShareModal && <CommonModal onCloseModal={() => handleCloseModal()} />}
+      {isOpenShareModal && (
+        <CommonModal
+          diarybookId={diarybookId}
+          diaryId={isData.diaryId}
+          onCloseModal={() => handleCloseModal()}
+        />
+      )}
     </StyledContainer>
   );
 };

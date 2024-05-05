@@ -52,7 +52,11 @@ export const ResultDiary = () => {
         {!isComment ? (
           <>
             {diaryData?.isMine ? (
-              <MyDetailDiary isData={{ ...diaryData }} onSelectMode={handleChangeMode} />
+              <MyDetailDiary
+                diarybookId={diarybookid}
+                isData={{ ...diaryData }}
+                onSelectMode={handleChangeMode}
+              />
             ) : (
               <NotMineDetailDiary isData={{ ...diaryData }} onSelectMode={handleChangeMode} />
             )}

@@ -3,15 +3,19 @@ import {
   StyledBtn,
   StyledBtnContainer,
   StyledModalContainer,
-  StyledQRCode,
   StyledTitleText,
 } from './ShareModal.style';
 import LinkCopyBtn from '../../../../assets/buttons/LinkCopyBtn.svg';
-import SaveBtn from '../../../../assets/buttons/SaveBtn.svg';
 import Logo from '../../../../assets/Logo.png';
 import QR from 'qrcode.react';
 
-export const ShareModal = () => {
+export const ShareModal = ({
+  diaryId,
+  diarybookId,
+}: {
+  diaryId: string | undefined;
+  diarybookId: string | undefined;
+}) => {
   const location = useLocation();
 
   const handleCopyClipBoard = async (text: string) => {
@@ -23,24 +27,26 @@ export const ShareModal = () => {
     }
   };
 
+  console.log(diaryId);
+  console.log(diarybookId);
+
   return (
     <StyledModalContainer onClick={(e) => e.stopPropagation()}>
       <StyledTitleText>카메라로 QR코드를 인식하세요!</StyledTitleText>
       <QR
-        value={'https://draw-draw-fe.vercel.app/:diarybookid/:diaryid/share'}
+        value={`https://www.draw-draw.site/${diarybookId}/${diaryId}/share`}
         size={200}
-        imageSettings={{ src: Logo, width: 100, height: 50, excavate: false }}
+        imageSettings={{ src: Logo, width: 100, height: 40, excavate: false }}
         id="qr-gen"
         level={'H'}
         includeMargin={true}
         bgColor={'white'}
         fgColor={'black'}
       />
-      {/* <StyledQRCode /> */}
       <StyledBtnContainer>
         <StyledBtn
           src={LinkCopyBtn}
-          onClick={() => handleCopyClipBoard(`https://draw-draw-fe.vercel.app${location.pathname}`)}
+          onClick={() => handleCopyClipBoard(`https://www.draw-draw.site${location.pathname}`)}
         />
       </StyledBtnContainer>
     </StyledModalContainer>

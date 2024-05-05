@@ -31,7 +31,7 @@ import { CommonModal } from '../../components/Modal/CommonModal';
 interface BoardItemType {
   coverType: string;
   diaryName: string;
-  diaryBookId: number;
+  diaryBookId: string;
   group: string;
   owner: string;
 }
@@ -43,7 +43,7 @@ export const UserDiaryBoard = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const [openModal, setOpenModal] = useState(false);
   const [selectedDiaryName, setSelectedDiaryName] = useState('');
-  const [selectedDiaryBookId, setSelectedDiaryBookId] = useState(0);
+  const [selectedDiaryBookId, setSelectedDiaryBookId] = useState('0');
   const setModalType = useSetModalType();
   const itemsPerPage = 6;
 
@@ -81,7 +81,7 @@ export const UserDiaryBoard = () => {
     setPageNumber(pageNumber - 1);
   };
 
-  const handleSelectModal = (diaryName: string, diaryBookId: number) => {
+  const handleSelectModal = (diaryName: string, diaryBookId: string) => {
     setOpenModal(true);
     setModalType('WRITEORVIEW');
     setSelectedDiaryName(diaryName);

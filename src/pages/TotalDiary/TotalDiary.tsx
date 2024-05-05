@@ -72,7 +72,11 @@ export const TotalDiary = () => {
             {!isComment ? (
               <>
                 {isMy && isDiaryData ? (
-                  <MyDetailDiary isData={isDiaryData} onSelectMode={handleChangeMode} />
+                  <MyDetailDiary
+                    diarybookId={diarybookid}
+                    isData={isDiaryData}
+                    onSelectMode={handleChangeMode}
+                  />
                 ) : (
                   <NotMineDetailDiary isData={isDiaryData} onSelectMode={handleChangeMode} />
                 )}
