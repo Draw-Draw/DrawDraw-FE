@@ -40,9 +40,8 @@ export const ShareModal = () => {
       <StyledBtnContainer>
         <StyledBtn
           src={LinkCopyBtn}
-          onClick={() => handleCopyClipBoard(`http://localhost:3000${location.pathname}`)}
+          onClick={() => handleCopyClipBoard(`https://draw-draw-fe.vercel.app${location.pathname}`)}
         />
-        <StyledBtn src={SaveBtn} />
       </StyledBtnContainer>
     </StyledModalContainer>
   );
