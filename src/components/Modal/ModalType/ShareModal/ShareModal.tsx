@@ -13,10 +13,12 @@ export const ShareModal = ({
   diaryId,
   diarybookId,
 }: {
-  diaryId: number | undefined;
+  diaryId: string | undefined;
   diarybookId: string | undefined;
 }) => {
   const location = useLocation();
+
+  console.log(diaryId, diarybookId);
 
   const handleCopyClipBoard = async (text: string) => {
     try {
