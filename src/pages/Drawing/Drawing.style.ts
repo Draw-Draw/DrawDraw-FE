@@ -76,7 +76,7 @@ export const StyledDrawingInputContainer = styled.div`
   }
   @media (max-width: 1366px) {
     font-size: 30px;
-    margin-top: -6%;
+    margin-top: -5%;
   }
 `;
 
@@ -128,6 +128,7 @@ export const StyledDaySelect = styled.div`
   }
   @media (max-width: 1366px) {
     font-size: 30px;
+    margin-top: -5%;
   }
 
   cursor: pointer;
