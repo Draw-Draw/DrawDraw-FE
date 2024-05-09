@@ -28,16 +28,24 @@ import Moon from '../../assets/weathers/Moon.png';
 import Rainbow from '../../assets/weathers/Rainbow.png';
 import Rainy from '../../assets/weathers/Rainy.png';
 import Snow from '../../assets/weathers/Snow.png';
+import { useNavigate } from 'react-router-dom';
 
 interface MineDetailDiaryProps {
   diarybookId: string | undefined;
+  diaryId?: string | undefined;
   isData: ResultDiaryType;
   onSelectMode?: () => void;
 }
 
-export const MyDetailDiary = ({ diarybookId, isData, onSelectMode }: MineDetailDiaryProps) => {
+export const MyDetailDiary = ({
+  diarybookId,
+  diaryId,
+  isData,
+  onSelectMode,
+}: MineDetailDiaryProps) => {
   const [isOpenShareModal, setIsOpenShareModal] = useState(false);
   const setModalType = useSetModalType();
+  const navigate = useNavigate();
 
   const dateString = isData.date;
 
@@ -58,6 +66,10 @@ export const MyDetailDiary = ({ diarybookId, isData, onSelectMode }: MineDetailD
     setIsOpenShareModal(false);
     setModalType('SHARE');
   }, []);
+
+  const handleGoEdit = () => {
+    navigate(`/diary/${diarybookId}/${isData.diaryId}/edit`);
+  };
 
   const handleShareOpenModal = () => {
     setIsOpenShareModal(true);
@@ -113,7 +125,7 @@ export const MyDetailDiary = ({ diarybookId, isData, onSelectMode }: MineDetailD
         <StyledImage src={isData.imageUrl} />
         <StyledInputDiary>{isData.content}</StyledInputDiary>
         <StyledBookMarkedContainer>
-          <StyledBookMarked src={PutBookMark} />
+          <StyledBookMarked src={PutBookMark} onClick={handleGoEdit} />
           <StyledBookMarked src={ShareBookMark} onClick={handleShareOpenModal} />
           <StyledBookMarked src={CommentBookMark} onClick={onSelectMode} />
         </StyledBookMarkedContainer>
