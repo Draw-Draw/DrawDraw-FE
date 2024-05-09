@@ -58,7 +58,7 @@ export const StyledDrawingText = styled.div<TextProps>`
 
 export const StyledDrawingInputContainer = styled.div`
   display: flex;
-  z-index: 3;
+  z-index: 4;
   flex-direction: row;
   position: relative;
   color: #672909;
@@ -112,7 +112,7 @@ export const StyledDrawingInput = styled.input<DayInputProps>`
 
 export const StyledDaySelect = styled.div`
   position: relative;
-  z-index: 3;
+  z-index: 4;
   color: rgba(103, 41, 9, 0.38);
   font-family: SSMullaeler;
   font-size: 34px;
@@ -178,7 +178,7 @@ interface IconProps {
 }
 
 export const StyledIcon = styled.img<IconProps>`
-  z-index: 3;
+  z-index: 4;
   width: ${(props) =>
     props.type === 'SUNNY'
       ? '98px'
@@ -222,7 +222,7 @@ export const StyledIcon = styled.img<IconProps>`
 `;
 
 export const StyledDrawingDayText = styled.div<TextProps>`
-  z-index: 3;
+  z-index: 4;
   color: #672909;
   font-family: SSMullaeler;
   font-size: 34px;
@@ -259,7 +259,7 @@ export const StyledSelectBtn = styled.img<SelectBtnProps>`
 `;
 
 export const StyledDaySelectContainer = styled.div`
-  z-index: 3;
+  z-index: 4;
   position: absolute;
   display: flex;
   flex-direction: row;
