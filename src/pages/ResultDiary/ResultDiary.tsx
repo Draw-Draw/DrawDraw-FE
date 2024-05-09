@@ -1,15 +1,6 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import {
-  StyledContainer,
-  StyledDiaryContainer,
-  // StyledDrawingBook,
-  StyledPageSlide,
-  StyledRangeContainer,
-  StyledRangeText,
-} from './ResultDiary.style';
+import { StyledContainer, StyledDiaryContainer } from './ResultDiary.style';
 import { Header } from '../../components/Header/Header';
-// import EmptySketchBook from '../../assets/EmptySketchBook.png';
 import { MyDetailDiary } from '../../components/MyDetailDiary/MyDetailDiary';
 import { NotMineDetailDiary } from '../../components/NotMineDetailDiary/NotMineDetailDiary';
 import { Comment } from '../../components/Comment/Comment';
@@ -54,7 +45,6 @@ export const ResultDiary = () => {
             {diaryData?.isMine ? (
               <MyDetailDiary
                 diarybookId={diarybookid}
-                diaryId={diaryid}
                 isData={{ ...diaryData }}
                 onSelectMode={handleChangeMode}
               />

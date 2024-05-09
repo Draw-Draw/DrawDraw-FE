@@ -32,17 +32,11 @@ import { useNavigate } from 'react-router-dom';
 
 interface MineDetailDiaryProps {
   diarybookId: string | undefined;
-  diaryId?: string | undefined;
   isData: ResultDiaryType;
   onSelectMode?: () => void;
 }
 
-export const MyDetailDiary = ({
-  diarybookId,
-  diaryId,
-  isData,
-  onSelectMode,
-}: MineDetailDiaryProps) => {
+export const MyDetailDiary = ({ diarybookId, isData, onSelectMode }: MineDetailDiaryProps) => {
   const [isOpenShareModal, setIsOpenShareModal] = useState(false);
   const setModalType = useSetModalType();
   const navigate = useNavigate();
