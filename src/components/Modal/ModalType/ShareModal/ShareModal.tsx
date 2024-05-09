@@ -13,7 +13,7 @@ export const ShareModal = ({
   diaryId,
   diarybookId,
 }: {
-  diaryId: string | undefined;
+  diaryId: number | undefined;
   diarybookId: string | undefined;
 }) => {
   const location = useLocation();
