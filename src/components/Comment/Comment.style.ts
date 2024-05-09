@@ -17,6 +17,7 @@ export const StyledCommentContainer = styled.div`
   align-items: center;
   @media (min-width: 1601px) and (max-width: 1920px) {
     margin-top: 140px;
+    gap: 10px;
   }
 `;
 
