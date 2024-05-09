@@ -6,12 +6,18 @@ export const StyledContainer = styled.div`
   background-size: cover;
   height: 120vh;
   text-align: center;
+  @media (max-width: 1599px) {
+    height: 100vh;
+  }
 `;
 
 export const StyledDrawingBook = styled.img`
   position: absolute;
   width: 68vw;
   z-index: 3;
+  @media (max-width: 1599px) {
+    width: 68vw;
+  }
 `;
 
 export const StyledDrawingContainer = styled.div`

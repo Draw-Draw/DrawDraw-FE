@@ -103,8 +103,10 @@ export const Canvas = forwardRef<CanvasRef, CanvasProps>((props, ref) => {
     if (!canvas) return;
 
     const resizeCanvas = () => {
+      const maxHeight = 1599;
+      const heightRatio = window.innerWidth <= maxHeight ? 0.38 : 0.47;
       canvas.width = window.innerWidth * 0.547;
-      canvas.height = window.innerHeight * 0.47;
+      canvas.height = window.innerHeight * heightRatio;
     };
 
     window.addEventListener('resize', resizeCanvas);
@@ -135,12 +137,24 @@ export const Canvas = forwardRef<CanvasRef, CanvasProps>((props, ref) => {
     console.log(imageURL);
   }, [line]);
 
-  const drawFn = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+  const drawFn = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent> | React.TouchEvent<HTMLCanvasElement>) => {
     if (!getCtx || !canvasRef.current) return;
-
-    const mouseX = e.nativeEvent.offsetX;
-    const mouseY = e.nativeEvent.offsetY;
-
+  
+    let mouseX = 0;
+    let mouseY = 0;
+    
+    if (e.type === 'mousemove' || e.type === 'mousedown' || e.type === 'mouseup' || e.type === 'mouseleave') {
+      mouseX = (e as React.MouseEvent<HTMLCanvasElement, MouseEvent>).nativeEvent.offsetX;
+      mouseY = (e as React.MouseEvent<HTMLCanvasElement, MouseEvent>).nativeEvent.offsetY;
+    } else if (e.type === 'touchstart' || e.type === 'touchmove' || e.type === 'touchend') {
+      const touch = (e as React.TouchEvent<HTMLCanvasElement>).touches[0];
+      if (touch) {
+        const rect = canvasRef.current.getBoundingClientRect();
+        mouseX = touch.clientX - rect.left;
+        mouseY = touch.clientY - rect.top;
+      }
+    }
+  
     if (painting) {
       if (!isPen) {
         getCtx.clearRect(
@@ -153,13 +167,12 @@ export const Canvas = forwardRef<CanvasRef, CanvasProps>((props, ref) => {
         getCtx.lineTo(mouseX, mouseY);
         getCtx.stroke();
       }
-      // 그림 그릴 때마다 그림 데이터를 스택에 추가
     } else {
       getCtx.beginPath();
       getCtx.moveTo(mouseX, mouseY);
     }
   };
-
+  
   const handleMouseDown = () => {
     if (!getCtx || !canvasRef.current) return;
 
@@ -170,6 +183,42 @@ export const Canvas = forwardRef<CanvasRef, CanvasProps>((props, ref) => {
 
   const handleMouseUp = () => {
     setPainting(false); // 마우스 클릭 상태를 false로 설정하여 그림 그리기 종료
+  };
+  
+  const handleTouchStart = (e: React.TouchEvent<HTMLCanvasElement>) => {
+    if (!getCtx || !canvasRef.current) return;
+
+    const touch = e.touches[0];
+    const rect = canvasRef.current.getBoundingClientRect();
+    const mouseX = touch.clientX - rect.left;
+    const mouseY = touch.clientY - rect.top;
+
+    setPainting(true);
+    getCtx.beginPath();
+    getCtx.moveTo(mouseX, mouseY);
+    const imageData = getCtx.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height);
+    setUndoStack((prevStack) => [...prevStack, imageData]);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLCanvasElement>) => {
+    if (!getCtx || !canvasRef.current || !painting) return;
+
+    const touch = e.touches[0];
+    const rect = canvasRef.current.getBoundingClientRect();
+    const mouseX = touch.clientX - rect.left;
+    const mouseY = touch.clientY - rect.top;
+
+    if (!isPen) {
+      getCtx.clearRect(
+        mouseX - getCtx.lineWidth / 2,
+        mouseY - getCtx.lineWidth / 2,
+        getCtx.lineWidth,
+        getCtx.lineWidth
+      );
+    } else {
+      getCtx.lineTo(mouseX, mouseY);
+      getCtx.stroke();
+    }
   };
 
   return (
@@ -182,6 +231,9 @@ export const Canvas = forwardRef<CanvasRef, CanvasProps>((props, ref) => {
           onMouseUp={handleMouseUp}
           onMouseMove={(e) => drawFn(e)}
           onMouseLeave={() => setPainting(false)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleMouseUp}
+          onTouchMove={handleTouchMove}
         />
       </StyledCanvas>
       {imageURL && <img src={imageURL} alt="" aria-hidden="true" />}
