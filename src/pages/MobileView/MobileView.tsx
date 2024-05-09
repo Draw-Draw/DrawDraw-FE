@@ -23,6 +23,7 @@ import Rainy from '../../assets/weathers/Rainy.png';
 import Snow from '../../assets/weathers/Snow.png';
 import Stamp from '../../assets/Stamps/GoodStamp.png';
 import Logo from '../../assets/Logo.png';
+import { getToken } from '../../apis/getToken';
 
 export const MobileView = () => {
   const { diarybookid, diaryid } = useParams<{
@@ -33,6 +34,7 @@ export const MobileView = () => {
 
   useEffect(() => {
     if (diarybookid && diaryid) {
+      getToken();
       const fetchDiary = async () => {
         try {
           const data = await getDiary(diarybookid, diaryid);
