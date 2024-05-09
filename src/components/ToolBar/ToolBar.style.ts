@@ -6,6 +6,9 @@ export const StyledContainer = styled.div`
   position: absolute;
   right: 140px;
   top: 22%;
+  @media (max-width: 1366px) {
+    right: 120px;
+  }
 `;
 
 export const StyledBackground = styled.img`
