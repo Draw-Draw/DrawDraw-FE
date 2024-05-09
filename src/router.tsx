@@ -13,6 +13,7 @@ import { Redirection } from './pages/Redirection/Redirection';
 import { ResultDiary } from './pages/ResultDiary/ResultDiary';
 import { SelectUserDiaryBoard } from './pages/SelectUserDiary/SelectUserDiary';
 import { MobileView } from './pages/MobileView/MobileView';
+import { EditDiary } from './pages/EditDiary/EditDiary';
 
 export function Router() {
   return (
@@ -26,6 +27,7 @@ export function Router() {
         <Route path="write" element={<CoverRegister />} />
       </Route>
       <Route path="/drawing/:diarybookid" element={<Drawing />} />
+      <Route path="/diary/:diarybookid/:diaryid/edit" element={<EditDiary />} />
       <Route path="/detail" element={<DetailDiary />} />
       <Route path="/my/:id" element={<UserDiaryBoard />} />
       <Route path="/my/select/:id" element={<SelectUserDiaryBoard />} />
