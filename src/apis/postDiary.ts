@@ -5,11 +5,20 @@ export const postDiary = async (
   diaryBookId: string | undefined,
   { date, weather, content }: DiaryType
 ) => {
-  const response = await client.post(`/api/v1/diaries/diary-book/${diaryBookId}`, {
-    date,
-    weather,
-    content,
-  });
+  const accessToken = localStorage.getItem('accessToken');
+  const response = await client.post(
+    `/api/v1/diaries/diary-book/${diaryBookId}`,
+    {
+      date,
+      weather,
+      content,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
 
   console.log(response.data.data.diaryId);
   return response.data.data.diaryId;
