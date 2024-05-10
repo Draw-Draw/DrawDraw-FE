@@ -18,8 +18,6 @@ export const ShareModal = ({
 }) => {
   const location = useLocation();
 
-  console.log(diaryId, diarybookId);
-
   const handleCopyClipBoard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
