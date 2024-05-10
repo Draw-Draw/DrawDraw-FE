@@ -48,7 +48,7 @@ export const StyledLine = styled.div`
 export const StyledDayContainer = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 2px;
   align-items: center;
 `;
 
