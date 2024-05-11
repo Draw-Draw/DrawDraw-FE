@@ -45,6 +45,7 @@ export const ResultDiary = () => {
             {diaryData?.isMine && diaryData ? (
               <MyDetailDiary
                 diarybookId={diarybookid}
+                diaryId={diaryid}
                 isData={diaryData}
                 onSelectMode={handleChangeMode}
               />
