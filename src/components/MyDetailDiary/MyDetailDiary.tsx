@@ -119,7 +119,7 @@ export const MyDetailDiary = ({
             ) : isData.weather === 'RAINY' ? (
               <StyledDiaryWeatherSelectText>비가 주륵주륵</StyledDiaryWeatherSelectText>
             ) : (
-              <StyledDiaryWeatherSelectText>눈이 평평</StyledDiaryWeatherSelectText>
+              <StyledDiaryWeatherSelectText>눈이 펑펑</StyledDiaryWeatherSelectText>
             ))}
         </StyledDaySelectContainer>
         <StyledImage src={isData.imageUrl} />

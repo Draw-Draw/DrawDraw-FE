@@ -81,7 +81,7 @@ export const MobileView = () => {
               ) : diaryData?.weather === 'RAINY' ? (
                 <div>비가 주륵주륵</div>
               ) : (
-                <div>눈이 평평</div>
+                <div>눈이 펑펑</div>
               ))}
             {diaryData?.weather && (
               <StyledIcon
