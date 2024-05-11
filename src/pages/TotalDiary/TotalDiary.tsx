@@ -23,7 +23,7 @@ const Btn = styled.button`
 `;
 
 export const TotalDiary = () => {
-  const { diarybookid, diaryid } = useParams<{
+  const { diarybookid } = useParams<{
     diarybookid: string | undefined;
     diaryid: string | undefined;
   }>();
