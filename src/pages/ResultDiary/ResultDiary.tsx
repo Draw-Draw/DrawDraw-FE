@@ -45,11 +45,11 @@ export const ResultDiary = () => {
             {diaryData?.isMine && diaryData ? (
               <MyDetailDiary
                 diarybookId={diarybookid}
-                isData={{ ...diaryData }}
+                isData={diaryData}
                 onSelectMode={handleChangeMode}
               />
             ) : (
-              <NotMineDetailDiary isData={{ ...diaryData }} onSelectMode={handleChangeMode} />
+              <NotMineDetailDiary isData={diaryData} onSelectMode={handleChangeMode} />
             )}
           </>
         ) : (
