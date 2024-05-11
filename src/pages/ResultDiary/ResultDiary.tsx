@@ -14,7 +14,7 @@ export const ResultDiary = () => {
     diaryid: string | undefined;
   }>();
   const [isComment, setIsComment] = useState(false);
-  const [diaryData, setDiaryData] = useState<ResultDiaryType | null>(null);
+  const [diaryData, setDiaryData] = useState<ResultDiaryType>({});
 
   useEffect(() => {
     if (diarybookid && diaryid) {
@@ -42,7 +42,7 @@ export const ResultDiary = () => {
       <StyledDiaryContainer>
         {!isComment ? (
           <>
-            {diaryData?.isMine ? (
+            {diaryData?.isMine && diaryData ? (
               <MyDetailDiary
                 diarybookId={diarybookid}
                 isData={{ ...diaryData }}
