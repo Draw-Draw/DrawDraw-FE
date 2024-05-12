@@ -250,6 +250,7 @@ interface SelectBtnProps {
 }
 
 export const StyledSelectBtn = styled.img<SelectBtnProps>`
+  cursor: pointer;
   z-index: 3;
   position: fixed;
   bottom: 5%;

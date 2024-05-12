@@ -37,7 +37,7 @@ export const EditDiary = () => {
     diarybookid: string | undefined;
     diaryid: string | undefined;
   }>();
-  const [diaryData, setDiaryData] = useState<ResultDiaryType | null>(null);
+  const [diaryData, setDiaryData] = useState<ResultDiaryType | null>();
 
   useEffect(() => {
     if (diarybookid && diaryid) {
