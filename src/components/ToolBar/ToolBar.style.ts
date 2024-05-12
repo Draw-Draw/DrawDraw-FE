@@ -47,6 +47,8 @@ export const StyledInputColor = styled.input`
   appearance: none;
   background-color: transparent;
   border: none;
+  cursor: pointer;
+  z-index: 9999;
 
   &::-webkit-color-swatch {
     border-radius: 30px;

@@ -35,7 +35,7 @@ interface ToolBarProps {
 export const ToolBar = ({ onSelectMode, onClearCanvas, onUndo, onRedo, isPen }: ToolBarProps) => {
   const [line, setLine] = useRecoilState(LineState);
   const [isOpenWidth, setIsOpenWidth] = useState(true);
-  const maxValue = 20;
+  const maxValue = 50;
 
   const handleChangeColor = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newColor = event.target.value;
@@ -66,37 +66,15 @@ export const ToolBar = ({ onSelectMode, onClearCanvas, onUndo, onRedo, isPen }: 
         ) : (
           <StyledIcon src={Eraser} onClick={onSelectMode} />
         )}
-        {line.color !== '#672909' ? (
-          <StyledInputColor type="color" value={line.color} onChange={handleChangeColor} />
-        ) : (
-          <>
-            <StyledIcon
-              src={Pallete}
-              onClick={() => {
-                const colorInput = document.querySelector(
-                  'input[type="color"]'
-                ) as HTMLInputElement;
-                if (colorInput) {
-                  colorInput.click();
-                }
-              }}
-            />
-            <StyledInputColor
-              type="color"
-              value={line.color}
-              onChange={handleChangeColor}
-              style={{ display: 'none' }}
-            />
-          </>
-        )}
+        <StyledInputColor type="color" value={line.color} onChange={handleChangeColor} />
         <StyledIcon src={SelectWidth} onClick={handleOpenSelectWidth} />
         {isOpenWidth && (
           <StyledRangeContainer>
             <StyledRange
               type="range"
-              min="3"
+              min="10"
               max={maxValue.toString()}
-              defaultValue={line.width.toString()}
+              defaultValue={50}
               onChange={handleChangeWidth}
             />
             <StyledCircleContainer>

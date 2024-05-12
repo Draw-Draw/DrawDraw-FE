@@ -9,7 +9,7 @@ export interface LineStateProps {
 export const LineState = atom<LineStateProps>({
   key: 'lineState',
   default: {
-    width: 5,
+    width: 50,
     color: '#672909',
   },
   effects_UNSTABLE: [persistAtom],
