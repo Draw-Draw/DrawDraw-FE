@@ -17,11 +17,17 @@ import { CommentType } from '../../../../types/Comment.type';
 
 interface Props {
   diaryId?: string;
+  onCloseModal?: () => void;
 }
 
-export const StampModal = ({ diaryId }: Props) => {
+export const StampModal = ({ diaryId, onCloseModal }: Props) => {
   const setModalType = useSetModalType();
   const [commentState, setCommentState] = useRecoilState(PostCommentState);
+
+  if (onCloseModal) {
+    console.log('?');
+    onCloseModal();
+  }
 
   const handleModalType = (stampType: string) => {
     setCommentState((prevPostCommentState: CommentType) => ({
@@ -31,8 +37,15 @@ export const StampModal = ({ diaryId }: Props) => {
     setModalType('COMMENT');
   };
 
+  const handleContainerClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (onCloseModal) {
+      onCloseModal();
+    }
+    event.stopPropagation();
+  };
+
   return (
-    <StyledModalContainer>
+    <StyledModalContainer onClick={handleContainerClick}>
       <StyledTitleText>도장을 선택해주세요!</StyledTitleText>
       <StyledStampGrid>
         <StyledStamp type="blue" src={BlueStamp} onClick={() => handleModalType('BLUE')} />

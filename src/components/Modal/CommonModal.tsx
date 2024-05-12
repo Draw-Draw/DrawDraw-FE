@@ -45,6 +45,7 @@ export const CommonModal = ({
   const handleBackgroundClick = () => {
     if (onCloseModal) {
       onCloseModal();
+      console.log('?');
     }
   };
 
@@ -57,7 +58,9 @@ export const CommonModal = ({
       {modalType === MODAL_TYPES.SHARE && (
         <ShareModal diarybookId={diarybookId} diaryId={diaryId} />
       )}
-      {modalType === MODAL_TYPES.STAMP && <StampModal diaryId={diaryId} />}
+      {modalType === MODAL_TYPES.STAMP && (
+        <StampModal onCloseModal={onCloseModal} diaryId={diaryId} />
+      )}
       {modalType === MODAL_TYPES.COMMENT && (
         <CommentModal diaryId={diaryId} onCloseModal={onCloseModal} fetchComment={fetchComment} />
       )}
