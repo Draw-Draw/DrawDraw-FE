@@ -11,4 +11,5 @@ export const StyledLogo = styled.img`
   width: 204px;
   margin-left: 55px;
   margin-top: 38px;
+  cursor: pointer;
 `;
