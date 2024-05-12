@@ -99,6 +99,7 @@ export const Canvas = forwardRef<CanvasRef, CanvasProps>((props, ref) => {
   );
 
   useEffect(() => {
+    setLine((prevLine) => ({ ...prevLine, width: 50, color: '#672909' }));
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -137,13 +138,20 @@ export const Canvas = forwardRef<CanvasRef, CanvasProps>((props, ref) => {
     console.log(imageURL);
   }, [line]);
 
-  const drawFn = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent> | React.TouchEvent<HTMLCanvasElement>) => {
+  const drawFn = (
+    e: React.MouseEvent<HTMLCanvasElement, MouseEvent> | React.TouchEvent<HTMLCanvasElement>
+  ) => {
     if (!getCtx || !canvasRef.current) return;
-  
+
     let mouseX = 0;
     let mouseY = 0;
-    
-    if (e.type === 'mousemove' || e.type === 'mousedown' || e.type === 'mouseup' || e.type === 'mouseleave') {
+
+    if (
+      e.type === 'mousemove' ||
+      e.type === 'mousedown' ||
+      e.type === 'mouseup' ||
+      e.type === 'mouseleave'
+    ) {
       mouseX = (e as React.MouseEvent<HTMLCanvasElement, MouseEvent>).nativeEvent.offsetX;
       mouseY = (e as React.MouseEvent<HTMLCanvasElement, MouseEvent>).nativeEvent.offsetY;
     } else if (e.type === 'touchstart' || e.type === 'touchmove' || e.type === 'touchend') {
@@ -154,7 +162,7 @@ export const Canvas = forwardRef<CanvasRef, CanvasProps>((props, ref) => {
         mouseY = touch.clientY - rect.top;
       }
     }
-  
+
     if (painting) {
       if (!isPen) {
         getCtx.clearRect(
@@ -172,7 +180,7 @@ export const Canvas = forwardRef<CanvasRef, CanvasProps>((props, ref) => {
       getCtx.moveTo(mouseX, mouseY);
     }
   };
-  
+
   const handleMouseDown = () => {
     if (!getCtx || !canvasRef.current) return;
 
@@ -184,7 +192,7 @@ export const Canvas = forwardRef<CanvasRef, CanvasProps>((props, ref) => {
   const handleMouseUp = () => {
     setPainting(false); // 마우스 클릭 상태를 false로 설정하여 그림 그리기 종료
   };
-  
+
   const handleTouchStart = (e: React.TouchEvent<HTMLCanvasElement>) => {
     if (!getCtx || !canvasRef.current) return;
 
