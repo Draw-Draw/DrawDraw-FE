@@ -68,7 +68,7 @@ export const MyDetailDiary = ({
   }, []);
 
   const handleGoEdit = () => {
-    navigate(`/diary/${diarybookId}/${isData.diaryId}/edit`);
+    navigate(`/diary/${diarybookId}/${diaryId}/edit`);
   };
 
   const handleShareOpenModal = () => {
