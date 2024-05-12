@@ -1,4 +1,3 @@
-import { client } from './client';
 import { Img2Img2Type } from '../types/Img2ImgType';
 import axios from 'axios';
 
@@ -32,15 +31,11 @@ export const PostImg2Img = async ({
     height: defaultHeight,
   };
 
-  const response = await axios.post(
-    'http://127.0.0.1:7860/sdapi/v1/img2img',
-    requestData,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
+  const response = await axios.post('http://127.0.0.1:7860/sdapi/v1/img2img', requestData, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 
   console.log(response);
   return response.data.images[0];
