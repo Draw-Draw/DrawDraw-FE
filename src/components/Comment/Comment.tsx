@@ -7,8 +7,10 @@ import {
   StyledCommentBook,
   StyledCommentContainer,
   StyledCommentText,
+  StyledLeftArrow,
   StyledNickname,
   StyledPlusBtn,
+  StyledRightArrow,
   StyledStamp,
   StyledText,
 } from './Comment.style';
@@ -26,6 +28,7 @@ import { getComment } from '../..//apis/getComment';
 import { ResponseCommentType } from '../../types/Comment.type';
 import { modalTypeState } from '../../recoil/modalType';
 import { useRecoilValue } from 'recoil';
+import Arrow from '../../assets/Arrow.png';
 
 interface CommentProps {
   onSelectMode: () => void;
@@ -38,6 +41,8 @@ export const Comment = ({ onSelectMode, diarybookid, diaryid }: CommentProps) =>
   const setModalType = useSetModalType();
   const [isComments, setIsComments] = useState<ResponseCommentType[]>([]);
   const modalType = useRecoilValue(modalTypeState);
+  const [pageNumber, setPageNumber] = useState(0);
+  const itemsPerPage = 4;
 
   const stampImages: Record<string, string> = {
     BLUE: BLUE,
@@ -65,6 +70,7 @@ export const Comment = ({ onSelectMode, diarybookid, diaryid }: CommentProps) =>
 
   const handleOpenModal = () => {
     setIsOpenModal(true);
+    setModalType('STAMP');
   };
 
   const handleCloseModal = () => {
@@ -73,12 +79,26 @@ export const Comment = ({ onSelectMode, diarybookid, diaryid }: CommentProps) =>
     }
   };
 
+  const nextPage = () => {
+    setPageNumber(pageNumber + 1);
+  };
+
+  const prevPage = () => {
+    setPageNumber(pageNumber - 1);
+  };
+
+  const getPageItems = () => {
+    const startIndex = pageNumber * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return isComments.slice(startIndex, endIndex);
+  };
+
   return (
     <>
       <StyledCommentBook src={CommentSketchBook} />
       <StyledCommentContainer>
         {isComments &&
-          isComments.map((item, index) => (
+          getPageItems().map((item, index) => (
             <StyledComment key={index}>
               <StyledStamp src={stampImages[item.stampType]} />
               <StyledCommentText>
@@ -92,6 +112,12 @@ export const Comment = ({ onSelectMode, diarybookid, diaryid }: CommentProps) =>
       <StyledBookMarkedContainer>
         <StyledBookMarked src={GoDiaryBookMark} onClick={onSelectMode} />
       </StyledBookMarkedContainer>
+      <StyledLeftArrow src={Arrow} onClick={prevPage} isDisabled={pageNumber === 0} />
+      <StyledRightArrow
+        src={Arrow}
+        onClick={nextPage}
+        isDisabled={pageNumber === Math.ceil(isComments.length / itemsPerPage) - 1}
+      />
       {isOpenModal && (
         <CommonModal
           diaryId={diaryid}

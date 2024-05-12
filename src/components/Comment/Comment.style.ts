@@ -96,3 +96,38 @@ export const StyledBookMarked = styled.img`
     margin-left: 10%;
   }
 `;
+
+interface ArrowProps {
+  isDisabled: boolean;
+}
+
+export const StyledLeftArrow = styled.img<ArrowProps>`
+  position: absolute;
+  z-index: 9999;
+  position: fixed;
+  margin-top: 43%;
+  left: 35%;
+  width: 89px;
+  display: ${(props) => (props.isDisabled ? 'none' : '')};
+  cursor: pointer;
+  @media (min-width: 1601px) and (max-width: 1920px) {
+    margin-top: 42%;
+    left: 40%;
+  }
+`;
+
+export const StyledRightArrow = styled.img<ArrowProps>`
+  position: absolute;
+  z-index: 9999;
+  position: fixed;
+  margin-top: 43%;
+  right: 35%;
+  width: 89px;
+  transform: scale(-1, 1);
+  display: ${(props) => (props.isDisabled ? 'none' : '')};
+  cursor: pointer;
+  @media (min-width: 1601px) and (max-width: 1920px) {
+    margin-top: 42%;
+    right: 40%;
+  }
+`;
