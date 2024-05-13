@@ -32,6 +32,7 @@ export const MobileView = () => {
   }>();
   const [diaryData, setDiaryData] = useState<ResultDiaryType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [forceUpdate, setForceUpdate] = useState(false);
 
   useEffect(() => {
     getToken();
@@ -41,7 +42,7 @@ export const MobileView = () => {
         try {
           const data = await getDiary(diarybookid, diaryid);
           setDiaryData(data);
-          window.location.reload();
+          setIsLoading(false);
         } catch (error) {
           console.error('Error fetching diary:', error);
         }
@@ -49,6 +50,8 @@ export const MobileView = () => {
       fetchDiary();
     }
   }, [diarybookid, diaryid]);
+
+  useEffect(() => {}, [forceUpdate]);
 
   if (isLoading) {
     return <div>Loading...</div>;
