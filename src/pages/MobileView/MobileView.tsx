@@ -50,7 +50,9 @@ export const MobileView = () => {
       };
       fetchDiary();
     }
-  }, []);
+  }, [diarybookid, diaryid]);
+
+  useEffect(() => {}, [diaryData]);
 
   if (isLoading) {
     return <div>Loading...</div>;
