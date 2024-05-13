@@ -37,13 +37,17 @@ export const MobileView = () => {
   useEffect(() => {
     getToken();
     setIsLoading(true);
+    console.log('fetch 들어가기 전');
     if (diarybookid && diaryid) {
       const fetchDiary = async () => {
         try {
           const data = await getDiary(diarybookid, diaryid);
           setDiaryData(data);
+          console.log('diarydata 지나감');
           setIsLoading(false);
+          console.log('isloading false');
           setForceUpdate((prevState) => !prevState);
+          console.log('forceUpdate');
         } catch (error) {
           console.error('Error fetching diary:', error);
         }
@@ -52,7 +56,10 @@ export const MobileView = () => {
     }
   }, [diarybookid, diaryid]);
 
-  useEffect(() => {}, [forceUpdate]);
+  useEffect(() => {
+    setIsLoading(false);
+    console.log('2번쨰 useeffect');
+  }, [forceUpdate]);
 
   if (isLoading) {
     return <div>Loading...</div>;
