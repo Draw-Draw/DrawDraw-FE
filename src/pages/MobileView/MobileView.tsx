@@ -58,6 +58,22 @@ export const MobileView = () => {
 
   useEffect(() => {
     setIsLoading(false);
+    if (diarybookid && diaryid) {
+      const fetchDiary = async () => {
+        try {
+          const data = await getDiary(diarybookid, diaryid);
+          setDiaryData(data);
+          console.log('diarydata 지나감');
+          setIsLoading(false);
+          console.log('isloading false');
+          setForceUpdate((prevState) => !prevState);
+          console.log('forceUpdate');
+        } catch (error) {
+          console.error('Error fetching diary:', error);
+        }
+      };
+      fetchDiary();
+    }
     console.log('2번쨰 useeffect');
   }, [forceUpdate]);
 
