@@ -79,52 +79,54 @@ export const MobileView = () => {
         <div>로딩 중입니다...</div>
       ) : (
         <StyledContainer>
-          <StyledMobileContainer>
-            <StyledHeader>
-              <div>
-                {year}. {String(month).padStart(2, '0')}. {String(day).padStart(2, '0')}
-              </div>
-              <StyledLine />
-              <StyledDayContainer>
-                {diaryData?.weather &&
-                  (diaryData?.weather === 'SUNNY' ? (
-                    <div>해가 쨍쨍</div>
-                  ) : diaryData?.weather === 'CLOUDY' ? (
-                    <div>구름이 많아요</div>
-                  ) : diaryData?.weather === 'MOON' ? (
-                    <div>별이 빛나는 밤에</div>
-                  ) : diaryData?.weather === 'RAINBOW' ? (
-                    <div>일곱빛깔 무지개</div>
-                  ) : diaryData?.weather === 'RAINY' ? (
-                    <div>비가 주륵주륵</div>
-                  ) : (
-                    <div>눈이 펑펑</div>
-                  ))}
-                {diaryData?.weather && (
-                  <StyledIcon
-                    type={diaryData?.weather}
-                    src={
-                      diaryData?.weather === 'SUNNY'
-                        ? Sunny
-                        : diaryData?.weather === 'CLOUDY'
-                          ? Cloud
-                          : diaryData?.weather === 'MOON'
-                            ? Moon
-                            : diaryData?.weather === 'RAINBOW'
-                              ? Rainbow
-                              : diaryData?.weather === 'RAINY'
-                                ? Rainy
-                                : Snow
-                    }
-                  />
-                )}
-              </StyledDayContainer>
-            </StyledHeader>
-            <StyledImg src={diaryData?.imageUrl} />
-            <StyledText>{diaryData?.content}</StyledText>
-            <StyledLogo src={Logo} />
-            <StyledStamp src={Stamp} />
-          </StyledMobileContainer>
+          {diaryData && (
+            <StyledMobileContainer>
+              <StyledHeader>
+                <div>
+                  {year}. {String(month).padStart(2, '0')}. {String(day).padStart(2, '0')}
+                </div>
+                <StyledLine />
+                <StyledDayContainer>
+                  {diaryData?.weather &&
+                    (diaryData?.weather === 'SUNNY' ? (
+                      <div>해가 쨍쨍</div>
+                    ) : diaryData?.weather === 'CLOUDY' ? (
+                      <div>구름이 많아요</div>
+                    ) : diaryData?.weather === 'MOON' ? (
+                      <div>별이 빛나는 밤에</div>
+                    ) : diaryData?.weather === 'RAINBOW' ? (
+                      <div>일곱빛깔 무지개</div>
+                    ) : diaryData?.weather === 'RAINY' ? (
+                      <div>비가 주륵주륵</div>
+                    ) : (
+                      <div>눈이 펑펑</div>
+                    ))}
+                  {diaryData?.weather && (
+                    <StyledIcon
+                      type={diaryData?.weather}
+                      src={
+                        diaryData?.weather === 'SUNNY'
+                          ? Sunny
+                          : diaryData?.weather === 'CLOUDY'
+                            ? Cloud
+                            : diaryData?.weather === 'MOON'
+                              ? Moon
+                              : diaryData?.weather === 'RAINBOW'
+                                ? Rainbow
+                                : diaryData?.weather === 'RAINY'
+                                  ? Rainy
+                                  : Snow
+                      }
+                    />
+                  )}
+                </StyledDayContainer>
+              </StyledHeader>
+              <StyledImg src={diaryData?.imageUrl} />
+              <StyledText>{diaryData?.content}</StyledText>
+              <StyledLogo src={Logo} />
+              <StyledStamp src={Stamp} />
+            </StyledMobileContainer>
+          )}
         </StyledContainer>
       )}
     </>
