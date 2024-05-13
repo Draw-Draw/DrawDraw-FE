@@ -6,10 +6,12 @@ import {
   StyledIcon,
   StyledImg,
   StyledLine,
+  StyledLineContainer,
   StyledLogo,
   StyledMobileContainer,
   StyledStamp,
   StyledText,
+  UnderlinedChar,
 } from './MobileView.style';
 import { useParams } from 'react-router-dom';
 import { getDiary } from '../../apis/getDiary';
@@ -58,23 +60,6 @@ export const MobileView = () => {
 
   useEffect(() => {
     setIsLoading(false);
-    if (diarybookid && diaryid) {
-      const fetchDiary = async () => {
-        try {
-          const data = await getDiary(diarybookid, diaryid);
-          setDiaryData(data);
-          console.log('diarydata 지나감');
-          setIsLoading(false);
-          console.log('isloading false');
-          setForceUpdate((prevState) => !prevState);
-          console.log('forceUpdate');
-        } catch (error) {
-          console.error('Error fetching diary:', error);
-        }
-      };
-      fetchDiary();
-    }
-    console.log('2번쨰 useeffect');
   }, [forceUpdate]);
 
   if (isLoading) {
@@ -102,6 +87,7 @@ export const MobileView = () => {
         <StyledContainer>
           {diaryData && (
             <StyledMobileContainer>
+              <StyledLogo src={Logo} />
               <StyledHeader>
                 <div>
                   {year}. {String(month).padStart(2, '0')}. {String(day).padStart(2, '0')}
@@ -143,8 +129,12 @@ export const MobileView = () => {
                 </StyledDayContainer>
               </StyledHeader>
               <StyledImg src={diaryData?.imageUrl} />
-              <StyledText>{diaryData?.content}</StyledText>
-              <StyledLogo src={Logo} />
+              <StyledLineContainer>
+                <StyledText>{diaryData?.content}</StyledText>
+                {Array.from({ length: 10 }).map((_, index) => (
+                  <UnderlinedChar key={index} />
+                ))}
+              </StyledLineContainer>
               <StyledStamp src={Stamp} />
             </StyledMobileContainer>
           )}

@@ -28,7 +28,6 @@ export const StyledHeader = styled.div`
   display: flex;
   flex-direction: row;
   gap: 29px;
-  margin-top: 70px;
   color: #672909;
   font-family: SSMullaeler;
   font-size: 22.54px;
@@ -108,8 +107,11 @@ export const StyledImg = styled.img`
 `;
 
 export const StyledText = styled.div`
+  position: absolute;
+  top: -8px;
+  width: 84%;
   z-index: 3;
-  margin-top: 21px;
+  margin-top: 14px;
   padding-left: 30px;
   padding-right: 30px;
   color: #672909;
@@ -117,7 +119,7 @@ export const StyledText = styled.div`
   font-size: 28px;
   font-style: normal;
   font-weight: 400;
-  line-height: 50px;
+  line-height: 49px;
   letter-spacing: 10px;
   word-spacing: 4px;
 `;
@@ -127,12 +129,31 @@ export const StyledStamp = styled.img`
   bottom: 180px;
   left: 110px;
   width: 133px;
-  opacity: 0.57;
+  opacity: 0.7;
   z-index: 2;
 `;
 
 export const StyledLogo = styled.img`
-  width: 130px;
-  margin-top: 8px;
+  width: 140px;
+  margin-top: 12px;
+  margin-bottom: 10px;
+
   /* margin-bottom: 70px; */
+`;
+
+export const StyledLineContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: fit-content;
+  bottom: 0%;
+`;
+export const UnderlinedChar = styled.span`
+  z-index: 0;
+  position: relative;
+  margin-top: 47px;
+  width: 100%;
+  height: 2px;
+  background-color: rgba(103, 41, 9, 0.34);
 `;
