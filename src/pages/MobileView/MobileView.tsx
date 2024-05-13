@@ -50,7 +50,7 @@ export const MobileView = () => {
       };
       fetchDiary();
     }
-  }, [diarybookid, diaryid]);
+  }, [diarybookid, diaryid, isLoading]);
 
   if (isLoading) {
     return <div>Loading...</div>;
