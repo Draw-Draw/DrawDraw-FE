@@ -35,7 +35,7 @@ export const MobileView = () => {
 
   useEffect(() => {
     getToken();
-  }, []);
+  }, [diarybookid, diaryid]);
 
   useEffect(() => {
     if (diarybookid && diaryid) {
@@ -50,7 +50,11 @@ export const MobileView = () => {
       };
       fetchDiary();
     }
-  }, [diarybookid, diaryid, isLoading]);
+  }, [diarybookid, diaryid]);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, [diarybookid, diaryid, diaryData]);
 
   if (isLoading) {
     return <div>Loading...</div>;
