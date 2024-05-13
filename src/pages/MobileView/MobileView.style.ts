@@ -117,7 +117,7 @@ export const StyledText = styled.div`
   font-size: 28px;
   font-style: normal;
   font-weight: 400;
-  line-height: 43px;
+  line-height: 50px;
   letter-spacing: 10px;
   word-spacing: 4px;
 `;
