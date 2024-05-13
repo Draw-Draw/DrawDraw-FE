@@ -13,6 +13,7 @@ export const ResultDiary = () => {
     diarybookid: string | undefined;
     diaryid: string | undefined;
   }>();
+
   const [isComment, setIsComment] = useState(false);
   const [diaryData, setDiaryData] = useState<ResultDiaryType>({});
 
