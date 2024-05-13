@@ -35,17 +35,16 @@ export const MobileView = () => {
 
   useEffect(() => {
     getToken();
-  }, [diarybookid, diaryid]);
-
-  useEffect(() => {
+    setIsLoading(true);
     if (diarybookid && diaryid) {
       const fetchDiary = async () => {
         try {
           const data = await getDiary(diarybookid, diaryid);
           setDiaryData(data);
-          setIsLoading(false);
         } catch (error) {
           console.error('Error fetching diary:', error);
+        } finally {
+          setIsLoading(false);
         }
       };
       fetchDiary();
