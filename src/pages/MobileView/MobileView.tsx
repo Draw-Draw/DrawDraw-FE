@@ -35,9 +35,9 @@ export const MobileView = () => {
 
   useEffect(() => {
     getToken();
-    setIsLoading(true);
     if (diarybookid && diaryid) {
-      const fetchDiary = async () => {
+      const fetchData = async () => {
+        setIsLoading(true);
         try {
           const data = await getDiary(diarybookid, diaryid);
           setDiaryData(data);
@@ -47,13 +47,9 @@ export const MobileView = () => {
           setIsLoading(false);
         }
       };
-      fetchDiary();
+      fetchData();
     }
   }, [diarybookid, diaryid]);
-
-  useEffect(() => {
-    setIsLoading(false);
-  }, [diarybookid, diaryid, diaryData]);
 
   if (isLoading) {
     return <div>Loading...</div>;
