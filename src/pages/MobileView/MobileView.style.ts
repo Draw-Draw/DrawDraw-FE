@@ -125,11 +125,11 @@ export const StyledText = styled.div`
 `;
 
 export const StyledStamp = styled.img`
-  position: relative;
-  bottom: 180px;
-  left: 110px;
-  width: 133px;
-  opacity: 0.7;
+  position: absolute;
+  top: 240px;
+  right: -15px;
+  width: 180px;
+  opacity: 0.6;
   z-index: 2;
 `;
 
