@@ -32,35 +32,25 @@ export const MobileView = () => {
     diarybookid: string | undefined;
     diaryid: string | undefined;
   }>();
-  const [diaryData, setDiaryData] = useState<ResultDiaryType | null>(null);
+  const [diaryData, setDiaryData] = useState<ResultDiaryType>();
   const [isLoading, setIsLoading] = useState(true);
-  const [forceUpdate, setForceUpdate] = useState(false);
 
   useEffect(() => {
     getToken();
     setIsLoading(true);
-    console.log('fetch 들어가기 전');
     if (diarybookid && diaryid) {
       const fetchDiary = async () => {
         try {
           const data = await getDiary(diarybookid, diaryid);
           setDiaryData(data);
-          console.log('diarydata 지나감');
           setIsLoading(false);
-          console.log('isloading false');
-          setForceUpdate((prevState) => !prevState);
-          console.log('forceUpdate');
         } catch (error) {
           console.error('Error fetching diary:', error);
         }
       };
       fetchDiary();
     }
-  }, [diarybookid, diaryid]);
-
-  useEffect(() => {
-    setIsLoading(false);
-  }, [forceUpdate]);
+  }, []);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -131,11 +121,11 @@ export const MobileView = () => {
               <StyledImg src={diaryData?.imageUrl} />
               <StyledLineContainer>
                 <StyledText>{diaryData?.content}</StyledText>
+                <StyledStamp src={Stamp} />
                 {Array.from({ length: 10 }).map((_, index) => (
                   <UnderlinedChar key={index} />
                 ))}
               </StyledLineContainer>
-              <StyledStamp src={Stamp} />
             </StyledMobileContainer>
           )}
         </StyledContainer>
