@@ -30,7 +30,8 @@ export const MobileView = () => {
     diarybookid: string | undefined;
     diaryid: string | undefined;
   }>();
-  const [diaryData, setDiaryData] = useState<ResultDiaryType | null>({});
+  const [diaryData, setDiaryData] = useState<ResultDiaryType | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (diarybookid && diaryid) {
@@ -41,13 +42,17 @@ export const MobileView = () => {
           setDiaryData(data);
         } catch (error) {
           console.error('Error fetching diary:', error);
+        } finally {
+          setIsLoading(false);
         }
       };
       fetchDiary();
     }
-  }, []);
+  }, [diarybookid, diaryid]);
 
-  useEffect(() => {}, []);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   const dateString = diaryData?.date;
 
