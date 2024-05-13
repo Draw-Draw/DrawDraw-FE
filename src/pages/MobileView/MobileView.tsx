@@ -43,6 +43,7 @@ export const MobileView = () => {
           const data = await getDiary(diarybookid, diaryid);
           setDiaryData(data);
           setIsLoading(false);
+          setForceUpdate((prevState) => !prevState);
         } catch (error) {
           console.error('Error fetching diary:', error);
         }
