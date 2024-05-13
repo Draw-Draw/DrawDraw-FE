@@ -52,7 +52,7 @@ export const Header = ({ isDrawing, isTotal }: HeaderProps) => {
 
   return (
     <StyledContainer $isTotal={isTotal}>
-      {!isTotal && <StyledLogo src={Logo} onClick={handleGoHome} />}
+      <StyledLogo src={Logo} onClick={handleGoHome} />
       <StyledBoxBtnContainer>
         {!isDrawing && !isTotal && <StyledBoxBtn src={DrawBoxBtn} onClick={handleGoDrawing} />}
         {isHamburgerClicked ? (

@@ -6,7 +6,7 @@ interface ContainerProps {
 export const StyledContainer = styled.div<ContainerProps>`
   display: flex;
   flex-direction: row;
-  justify-content: ${(props) => (props.$isTotal ? 'flex-end' : 'space-between')};
+  justify-content: space-between;
   align-items: center;
   padding-top: 10px;
   padding-left: 55px;
