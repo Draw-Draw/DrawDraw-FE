@@ -35,22 +35,20 @@ export const MobileView = () => {
 
   useEffect(() => {
     getToken();
-    fetchDiary(); // 첫 렌더링 시에도 데이터를 가져옴
-  }, []); // 의존성 배열을 비워 첫 렌더링 시에만 실행
-
-  const fetchDiary = async () => {
     setIsLoading(true);
-    try {
-      if (diarybookid && diaryid) {
-        const data = await getDiary(diarybookid, diaryid);
-        setDiaryData(data);
-      }
-    } catch (error) {
-      console.error('Error fetching diary:', error);
-    } finally {
-      setIsLoading(false);
+    if (diarybookid && diaryid) {
+      const fetchDiary = async () => {
+        try {
+          const data = await getDiary(diarybookid, diaryid);
+          setDiaryData(data);
+          window.location.reload();
+        } catch (error) {
+          console.error('Error fetching diary:', error);
+        }
+      };
+      fetchDiary();
     }
-  };
+  }, [diarybookid, diaryid]);
 
   if (isLoading) {
     return <div>Loading...</div>;
