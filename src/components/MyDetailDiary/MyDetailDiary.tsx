@@ -60,6 +60,7 @@ export const MyDetailDiary = ({
     day = parseInt(dayStr, 10);
   }
 
+  const shareDiaryId = diaryId ? diaryId : isData.diaryId;
   console.log(`년: ${year}, 월: ${month}, 일: ${day}`);
 
   useEffect(() => {
@@ -137,7 +138,7 @@ export const MyDetailDiary = ({
       {isOpenShareModal && (
         <CommonModal
           diarybookId={diarybookId}
-          diaryId={diaryId}
+          diaryId={shareDiaryId}
           onCloseModal={() => handleCloseModal()}
         />
       )}
