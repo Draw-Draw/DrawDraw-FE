@@ -30,7 +30,7 @@ export const MobileView = () => {
     diarybookid: string | undefined;
     diaryid: string | undefined;
   }>();
-  const [diaryData, setDiaryData] = useState<ResultDiaryType | null>(null);
+  const [diaryData, setDiaryData] = useState<ResultDiaryType | null>({});
 
   useEffect(() => {
     if (diarybookid && diaryid) {
@@ -45,7 +45,9 @@ export const MobileView = () => {
       };
       fetchDiary();
     }
-  }, [diarybookid, diaryid]);
+  }, []);
+
+  useEffect(() => {}, []);
 
   const dateString = diaryData?.date;
 
