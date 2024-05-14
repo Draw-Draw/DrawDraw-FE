@@ -39,14 +39,23 @@ export const MobileView = () => {
     getToken();
     setIsLoading(true);
     if (diarybookid && diaryid) {
-      const fetchDiary = async () => {
-        try {
-          const data = await getDiary(diarybookid, diaryid);
-          setDiaryData(data);
-          setIsLoading(false);
-        } catch (error) {
-          console.error('Error fetching diary:', error);
-        }
+      const fetchDiary = () => {
+        // const data = await getDiary(diarybookid, diaryid);
+        // setDiaryData(data);
+        // setIsLoading(false);
+        const data = getDiary(diarybookid, diaryid);
+        data
+          .then(function (res) {
+            if (res) {
+              setDiaryData(res);
+              setIsLoading(false);
+            } else {
+              console.log('error');
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       };
       fetchDiary();
     }
