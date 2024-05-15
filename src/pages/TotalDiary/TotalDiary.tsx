@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 import {
   StyledBtn,
   StyledContainer,
@@ -20,10 +19,6 @@ import { getTotalDiary } from '../../apis/getTotalDiary';
 import { ResultDiaryType } from '@/types/ResultDiary.type';
 import Rainy from '../../assets/weathers/Rainy.png';
 import { useNavigate } from 'react-router-dom';
-
-const Btn = styled.button`
-  z-index: 9999;
-`;
 
 export const TotalDiary = () => {
   const { diarybookid } = useParams<{
