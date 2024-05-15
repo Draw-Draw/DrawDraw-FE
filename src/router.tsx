@@ -14,11 +14,13 @@ import { ResultDiary } from './pages/ResultDiary/ResultDiary';
 import { SelectUserDiaryBoard } from './pages/SelectUserDiary/SelectUserDiary';
 import { MobileView } from './pages/MobileView/MobileView';
 import { EditDiary } from './pages/EditDiary/EditDiary';
+import { Exhibition } from './pages/Exhibition/Exhibition';
 
 export function Router() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/exhibition" element={<Exhibition />} />
       <Route path="/landing" element={<Landing />} />
       <Route path="/auth" element={<Redirection />} />
       <Route path="/onboarding" element={<Onboarding />} />
