@@ -82,10 +82,9 @@ export const StyledPageSlide = styled.input`
 export const StyledRangeText = styled.div`
   color: #fffaec;
   text-align: center;
-  -webkit-text-stroke-width: 0.688845694065094;
-  -webkit-text-stroke-color: #762a10;
+  text-shadow: 3px 2px 3px #672909;
   font-family: SSMullaeler;
-  font-size: 28px;
+  font-size: 32px;
   font-style: normal;
   font-weight: 400;
   line-height: 44.57px;
