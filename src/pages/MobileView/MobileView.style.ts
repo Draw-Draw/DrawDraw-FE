@@ -25,6 +25,7 @@ export const StyledHeader = styled.div`
   width: 100%;
   height: 54px;
   border-top: 4.5px solid #672909;
+  border-bottom: 4.5px solid #672909;
   display: flex;
   flex-direction: row;
   gap: 29px;
@@ -102,7 +103,6 @@ export const StyledIcon = styled.img<IconProps>`
 export const StyledImg = styled.img`
   background-size: cover;
   height: 257px;
-  border-top: 4.5px solid #672909;
   border-bottom: 4.5px solid #672909;
 `;
 
@@ -149,6 +149,7 @@ export const StyledLineContainer = styled.div`
   height: fit-content;
   bottom: 0%;
 `;
+
 export const UnderlinedChar = styled.span`
   z-index: 0;
   position: relative;
@@ -156,4 +157,17 @@ export const UnderlinedChar = styled.span`
   width: 100%;
   height: 2px;
   background-color: rgba(103, 41, 9, 0.34);
+`;
+
+export const StyledBtnContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const StyledSaveBtn = styled.img`
+  width: 120px;
+  position: fixed;
+  bottom: 2%;
+  z-index: 9999;
 `;

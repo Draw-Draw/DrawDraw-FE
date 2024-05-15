@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+  StyledBtnContainer,
   StyledContainer,
   StyledDayContainer,
   StyledHeader,
@@ -9,6 +10,7 @@ import {
   StyledLineContainer,
   StyledLogo,
   StyledMobileContainer,
+  StyledSaveBtn,
   StyledStamp,
   StyledText,
   UnderlinedChar,
@@ -24,8 +26,11 @@ import Rainbow from '../../assets/weathers/Rainbow.png';
 import Rainy from '../../assets/weathers/Rainy.png';
 import Snow from '../../assets/weathers/Snow.png';
 import Stamp from '../../assets/Stamps/GoodStamp.png';
+import Save from '../../assets/buttons/SaveBtn.svg';
 import Logo from '../../assets/Logo.png';
 import { getToken } from '../../apis/getToken';
+import html2canvas from 'html2canvas';
+import { getImgUrl } from '../../apis/getImgUrl';
 
 export const MobileView = () => {
   const { diarybookid, diaryid } = useParams<{
@@ -34,34 +39,29 @@ export const MobileView = () => {
   }>();
   const [diaryData, setDiaryData] = useState<ResultDiaryType>();
   const [isLoading, setIsLoading] = useState(true);
+  const [imageSrc, setImageSrc] = useState<string | null>(null);
 
   useEffect(() => {
-    getToken();
-    setIsLoading(true);
-    if (diarybookid && diaryid) {
-      const fetchDiary = () => {
-        // const data = await getDiary(diarybookid, diaryid);
-        // setDiaryData(data);
-        // setIsLoading(false);
-        const data = getDiary(diarybookid, diaryid);
-        data
-          .then(function (res) {
-            if (res) {
-              setDiaryData(res);
-              setIsLoading(false);
-            } else {
-              console.log('error');
-            }
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      };
-      fetchDiary();
-    }
-  }, [diarybookid, diaryid]);
+    const fetchTokenAndDiary = async () => {
+      try {
+        await getToken();
+        setIsLoading(true);
+        if (diarybookid && diaryid) {
+          const data: ResultDiaryType = await getDiary(diarybookid, diaryid);
+          const base64 = await getImgUrl(data.imageUrl);
+          setImageSrc(base64);
+          setDiaryData(data);
+          setIsLoading(false);
+        } else {
+          console.error('Diary data not found');
+        }
+      } catch (error) {
+        console.error('Error fetching token or diary:', error);
+      }
+    };
 
-  useEffect(() => {}, [diaryData]);
+    fetchTokenAndDiary();
+  }, [diarybookid, diaryid]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -80,12 +80,37 @@ export const MobileView = () => {
     day = parseInt(dayStr, 10);
   }
 
+  const saveAs = (uri: any, filename: string) => {
+    var link = document.createElement('a');
+    if (typeof link.download === 'string') {
+      link.href = uri;
+      link.download = filename;
+
+      document.body.appendChild(link);
+
+      link.click();
+
+      document.body.removeChild(link);
+    } else {
+      window.open(uri);
+    }
+  };
+
+  const download = () => {
+    window.scrollTo(0, 0);
+    const captureImg: any = document.querySelector('#captureImg');
+    html2canvas(captureImg, { allowTaint: false, useCORS: true }).then(function (canvas) {
+      saveAs(canvas.toDataURL(), 'captureImg.jpg');
+      // document.body.appendChild(canvas);
+    });
+  };
+
   return (
     <>
       {isLoading ? (
         <div>로딩 중입니다...</div>
       ) : (
-        <StyledContainer>
+        <StyledContainer id="captureImg">
           {diaryData && (
             <StyledMobileContainer>
               <StyledLogo src={Logo} />
@@ -129,7 +154,7 @@ export const MobileView = () => {
                   )}
                 </StyledDayContainer>
               </StyledHeader>
-              <StyledImg src={diaryData?.imageUrl} />
+              <StyledImg src={`data:image/png;base64,${imageSrc}`} />
               <StyledLineContainer>
                 <StyledText>{diaryData?.content}</StyledText>
                 <StyledStamp src={Stamp} />
@@ -139,6 +164,9 @@ export const MobileView = () => {
               </StyledLineContainer>
             </StyledMobileContainer>
           )}
+          <StyledBtnContainer>
+            <StyledSaveBtn src={Save} onClick={download} />
+          </StyledBtnContainer>
         </StyledContainer>
       )}
     </>
