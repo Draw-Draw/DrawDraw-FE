@@ -99,7 +99,13 @@ export const MobileView = () => {
   const download = () => {
     window.scrollTo(0, 0);
     const captureImg: any = document.querySelector('#captureImg');
-    html2canvas(captureImg, { allowTaint: false, useCORS: true }).then(function (canvas) {
+    html2canvas(captureImg, {
+      allowTaint: false,
+      useCORS: true,
+      ignoreElements: (element) => {
+        return element.classList.contains('excludeCapture');
+      },
+    }).then(function (canvas) {
       saveAs(canvas.toDataURL(), 'captureImg.jpg');
       // document.body.appendChild(canvas);
     });
@@ -164,7 +170,7 @@ export const MobileView = () => {
               </StyledLineContainer>
             </StyledMobileContainer>
           )}
-          <StyledBtnContainer>
+          <StyledBtnContainer className="excludeCapture">
             <StyledSaveBtn src={Save} onClick={download} />
           </StyledBtnContainer>
         </StyledContainer>
