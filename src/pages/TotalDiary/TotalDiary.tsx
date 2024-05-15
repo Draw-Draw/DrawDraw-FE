@@ -1,22 +1,25 @@
-// import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
+  StyledBtn,
   StyledContainer,
   StyledDiaryContainer,
-  // StyledDrawingBook,
+  StyledIcons,
+  StyledNoneContaier,
   StyledPageSlide,
   StyledRangeContainer,
   StyledRangeText,
+  StyledText,
 } from './TotalDiary.style';
 import { Header } from '../../components/Header/Header';
-// import EmptySketchBook from '../../assets/EmptySketchBook.png';
 import { MyDetailDiary } from '../../components/MyDetailDiary/MyDetailDiary';
 import { NotMineDetailDiary } from '../../components/NotMineDetailDiary/NotMineDetailDiary';
 import { Comment } from '../../components/Comment/Comment';
 import { useParams } from 'react-router-dom';
 import { getTotalDiary } from '../../apis/getTotalDiary';
 import { ResultDiaryType } from '@/types/ResultDiary.type';
+import Rainy from '../../assets/weathers/Rainy.png';
+import { useNavigate } from 'react-router-dom';
 
 const Btn = styled.button`
   z-index: 9999;
@@ -32,6 +35,7 @@ export const TotalDiary = () => {
   const [isComment, setIsComment] = useState(false);
   const [isDiaryArr, setIsDiaryArr] = useState([]);
   const [isDiaryData, setIsDiaryData] = useState<ResultDiaryType>({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDiaryData = async () => {
@@ -63,11 +67,15 @@ export const TotalDiary = () => {
     console.log(isComment);
   };
 
+  const handleGoDrawing = () => {
+    navigate(`/drawing/${diarybookid}`);
+  };
+
   return (
     <StyledContainer>
       <Header isDrawing={false} isTotal />
       <StyledDiaryContainer>
-        {isDiaryArr.length > 0 && (
+        {isDiaryArr.length > 0 ? (
           <>
             {!isComment ? (
               <>
@@ -101,6 +109,12 @@ export const TotalDiary = () => {
               />
             )}
           </>
+        ) : (
+          <StyledNoneContaier>
+            <StyledIcons src={Rainy} />
+            <StyledText>이 일기장에 작성된 일기가 없어요</StyledText>
+            <StyledBtn onClick={handleGoDrawing}>일기 쓰러 가기</StyledBtn>
+          </StyledNoneContaier>
         )}
       </StyledDiaryContainer>
     </StyledContainer>

@@ -99,3 +99,58 @@ export const StyledRangeContainer = styled.div`
   bottom: 2%;
   z-index: 9000;
 `;
+
+export const StyledNoneContaier = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10%;
+  top: 33%;
+  @media (min-width: 1601px) and (max-width: 1920px) {
+    top: 40%;
+    margin-top: 10%;
+  }
+`;
+
+export const StyledText = styled.div`
+  color: #fffaec;
+  text-align: center;
+  margin-top: 10px;
+  -webkit-text-stroke-width: 1.3265305757522583;
+  -webkit-text-stroke-color: #762a10;
+  font-family: SSMullaeler;
+  font-size: 45.694px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 85.831px;
+  text-shadow: 0px 4px #762a10;
+  @media (min-width: 1601px) and (max-width: 1920px) {
+    font-size: 65.694px;
+  }
+`;
+
+export const StyledIcons = styled.img`
+  width: 140px;
+  height: 140px;
+`;
+
+export const StyledBtn = styled.button`
+  background: url('../../assets/DropDown.svg') #d7ccae -788.11px -95.564px / 501.061% 243.323%
+    no-repeat;
+  margin-top: 10px;
+  width: 170px;
+  height: 70px;
+  border-radius: 20px;
+  border: 5px solid #511f05;
+  color: #511f05;
+  font-family: SSMullaeler;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 58px;
+  box-shadow:
+    inset 0px -6px 2px #ab9274,
+    0px 5px #762a10;
+  cursor: pointer;
+`;
