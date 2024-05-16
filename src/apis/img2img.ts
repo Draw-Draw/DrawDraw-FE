@@ -13,7 +13,7 @@ export const PostImg2Img = async ({
 }: Img2Img2Type) => {
   const defaultPrompt = prompt;
   const defaultNegativePrompt =
-    'lowres, nsfw, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, (worst quality:1.3), (low quality:1.3), normal quality ,jpeg artifacts, signature, watermark, username, blurry';
+    'lowres, nsfw, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, easynegative, (worst quality:1.9), (low quality:1.9), (normal quality:1.9), jpeg artifacts, signature, watermark, username, blurry';
   const defaultSeed = -1;
   const defaultSteps = 30;
   const defaultIncludeInitImages = true;
