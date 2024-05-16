@@ -106,7 +106,7 @@ export const MobileView = () => {
         return element.classList.contains('excludeCapture');
       },
     }).then(function (canvas) {
-      saveAs(canvas.toDataURL(), 'captureImg.jpg');
+      saveAs(canvas.toDataURL(), 'captureImg');
       // document.body.appendChild(canvas);
     });
   };
