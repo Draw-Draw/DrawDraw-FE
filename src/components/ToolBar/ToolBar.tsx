@@ -72,7 +72,7 @@ export const ToolBar = ({ onSelectMode, onClearCanvas, onUndo, onRedo, isPen }: 
           <StyledRangeContainer>
             <StyledRange
               type="range"
-              min="10"
+              min="3"
               max={maxValue.toString()}
               defaultValue={50}
               onChange={handleChangeWidth}
