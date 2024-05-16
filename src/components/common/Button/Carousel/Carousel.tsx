@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import PINK from '../../../../assets/Cover/PINK.svg';
 import YELLOW from '../../../../assets/Cover/ORANGE.svg';
 import GREEN from '../../../../assets/Cover/GREEN.svg';
@@ -6,6 +7,8 @@ import BLUE from '../../../../assets/Cover/BLUE.svg';
 import PURPLE from '../../../../assets/Cover/PURPLE.svg';
 import { StyledContainer } from './Carousel.style';
 import { Slider } from './Slider';
+import { PostDiaryState } from '../../../../recoil/PostDiaryState';
+import { DiaryBookType } from '../../../../types/DiaryBook.type';
 
 export interface SliderProps {
   id: number;
@@ -17,6 +20,8 @@ export interface CarouselProps {
 }
 
 export const Carousel = () => {
+  const [postDiaryState, setPostDiaryState] = useRecoilState(PostDiaryState);
+
   const slider = [
     { id: 1, type: 'PINK', src: `${PINK}` },
     { id: 2, type: 'YELLOW', src: `${YELLOW}` },
@@ -30,11 +35,15 @@ export const Carousel = () => {
   const total = slider.length;
 
   const goNext = () => {
-    setCurrentSlide((val) => (val === total - 1 ? 0 : val + 1)); // 다음 슬라이드로 이동
+    const nextSlide = currentSlide === total - 1 ? 0 : currentSlide + 1; // 다음 슬라이드로 이동
+    setCurrentSlide(nextSlide);
+    updatePostDiaryState(slider[nextSlide - 1].type);
   };
 
   const goPrev = () => {
-    setCurrentSlide((val) => (val === 0 ? total - 1 : val - 1)); // 이전 슬라이드로 이동
+    const prevSlide = currentSlide === 0 ? total - 1 : currentSlide - 1; // 이전 슬라이드 인덱스 계산
+    setCurrentSlide(prevSlide); // 이전 슬라이드로 이동
+    updatePostDiaryState(slider[prevSlide - 1].type);
   };
 
   const check = (id: number) => {
@@ -53,6 +62,13 @@ export const Carousel = () => {
     return 'hidden';
   };
 
+  const updatePostDiaryState = (type: string) => {
+    setPostDiaryState((prev: DiaryBookType) => ({
+      ...prev,
+      coverType: type,
+    }));
+  };
+
   return (
     <StyledContainer>
       {slider.map((val) => {
@@ -64,6 +80,7 @@ export const Carousel = () => {
             src={val.src}
             onPrev={goPrev}
             onNext={goNext}
+            onUpdate={() => updatePostDiaryState(val.type)}
           />
         );
       })}

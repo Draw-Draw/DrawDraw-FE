@@ -9,18 +9,10 @@ interface SliderProps {
   type: string;
   onPrev?: () => void;
   onNext?: () => void;
+  onUpdate?: () => void;
 }
 
-export const Slider = ({ check, src, type, onPrev, onNext }: SliderProps) => {
-  const [postDiaryState, setPostDiaryState] = useRecoilState(PostDiaryState);
-
-  const handleCoverTypeSelection = () => {
-    setPostDiaryState((prev: DiaryBookType) => ({
-      ...prev,
-      coverType: type,
-    }));
-  };
-
+export const Slider = ({ check, src, type, onPrev, onNext, onUpdate }: SliderProps) => {
   if (check !== 'hidden') {
     if (check === 'prev') {
       return <NowSlider src={src} check={check} onClick={onPrev} />;
@@ -29,7 +21,7 @@ export const Slider = ({ check, src, type, onPrev, onNext }: SliderProps) => {
       return <NowSlider src={src} check={check} onClick={onNext} />;
     }
     if (check === 'now') {
-      return <NowSlider src={src} check={check} onClick={handleCoverTypeSelection} />;
+      return <NowSlider src={src} check={check} onClick={onUpdate} />;
     }
   }
   return null;
