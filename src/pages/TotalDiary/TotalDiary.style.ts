@@ -26,6 +26,7 @@ export const StyledDrawingBook = styled.img`
 `;
 
 export const StyledPageSlide = styled.input`
+  z-index: 3;
   accent-color: #4f1d03;
   background: #d7ccae;
   -webkit-appearance: none;
