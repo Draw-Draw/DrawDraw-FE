@@ -20,6 +20,9 @@ export const Redirection = () => {
           });
           if (response.data.data.isExist === false) {
             navigate('/onboarding');
+            localStorage.setItem('accessToken', response.data.data.accessToken);
+            localStorage.setItem('refreshToken', response.data.data.refreshToken);
+            localStorage.setItem('memberId', response.data.data.memberId);
           } else {
             navigate('/');
             localStorage.setItem('accessToken', response.data.data.accessToken);
